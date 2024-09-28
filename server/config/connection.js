@@ -18,19 +18,4 @@ const sequelize = process.env.DB_URL
       },
     );
 
-// import { UserFactory } from "../models/user.js";
-// import { RecipeFactory } from "../models/recipe.js";
-// import { NutritionFactory } from "../models/nutrition.js";
-
-// const User = UserFactory(sequelize);
-// const Recipe = RecipeFactory(sequelize);
-// const Nutrition = NutritionFactory(sequelize);
-
-// User.belongsToMany(Recipe, { through: "userrecipes" });
-// Recipe.belongsToMany(User, { through: "userrecipes" });
-// Recipe.hasOne(Nutrition);
-// Nutrition.belongsTo(Recipe);
-
-// export { sequelize, User, Recipe, Nutrition };
-
 export default sequelize;
