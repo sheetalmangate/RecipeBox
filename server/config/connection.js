@@ -1,17 +1,21 @@
-import Seqeulize from "sequelize";
-import "dotenv/config";
+import dotenv from "dotenv";
+dotenv.config();
 
-const sequelize =
-  process.env.NODE_ENV === "production"
-    ? new Seqeulize(process.env.DB_URL)
-    : new Seqeulize(
-        process.env.DB_NAME,
-        process.env.DB_USER,
-        process.env.DB_PASS,
-        {
-          host: "localhost",
-          dialect: "postgres",
+import { Sequelize } from "sequelize";
+
+const sequelize = process.env.DB_URL
+  ? new Sequelize(process.env.DB_URL)
+  : new Sequelize(
+      process.env.DB_NAME || "",
+      process.env.DB_USER || "",
+      process.env.DB_PASSWORD,
+      {
+        host: "localhost",
+        dialect: "postgres",
+        dialectOptions: {
+          decimalNumbers: true,
         },
-      );
+      },
+    );
 
 export default sequelize;
