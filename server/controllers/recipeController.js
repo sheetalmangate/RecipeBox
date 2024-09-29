@@ -26,11 +26,7 @@ export const getRecipeById = async (req, res) => {
 
 export const getRecipeByHash = async (req, res) => {
   try {
-    const { title, ingredients, servings, instructions } = req.params;
-    const unique_hash = crypto
-      .createHash("sha256")
-      .update(title + ingredients + servings + instructions)
-      .digest("hex");
+    const { unique_hash } = req.params;
     const recipe = await Recipe.findOne({
       where: { unique_hash: unique_hash },
     });
@@ -63,10 +59,10 @@ export const updateRecipe = async (req, res) => {
       recipe.ingredients = ingredients;
       recipe.servings = servings;
       recipe.instructions = instructions;
-      recipe.unique_hash = crypto
-        .createHash("sha256")
-        .update(title + ingredients + servings + instructions)
-        .digest("hex");
+      // recipe.unique_hash = crypto
+      //   .createHash("sha256")
+      //   .update(title + ingredients + servings + instructions)
+      //   .digest("hex");
       await recipe.save();
       res.json(recipe);
     } else {

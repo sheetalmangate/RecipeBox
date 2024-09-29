@@ -4,8 +4,9 @@ dotenv.config();
 import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import sequelize from "./config/connection.js";
-import router from "./routes/index.js";
+// Import sequelize from models/index.js which is defined in config/connection.js
+import { sequelize } from "./models/index.js";
+import routes from "./routes/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,7 +15,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
-app.use(router);
+app.use(routes);
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("../client/dist"));

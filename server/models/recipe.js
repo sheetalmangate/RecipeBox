@@ -1,6 +1,16 @@
 import { DataTypes, Model } from "sequelize";
 
-export class Recipe extends Model {}
+export class Recipe extends Model {
+  // Hash the title, ingredients, servings, and instructions to prevent duplicate recipes
+  async setUniqueHash() {
+    const hash = crypto.createHash("sha256");
+    hash.update(this.title);
+    hash.update(this.ingredients);
+    hash.update(this.servings);
+    hash.update(this.instructions);
+    this.unique_hash = hash.digest("hex");
+  }
+}
 
 export function RecipeFactory(sequelize) {
   Recipe.init(
@@ -36,6 +46,14 @@ export function RecipeFactory(sequelize) {
     {
       tableName: "recipes",
       sequelize,
+      hooks: {
+        beforeCreate: async (recipe) => {
+          await recipe.setUniqueHash();
+        },
+        beforeUpdate: async (recipe) => {
+          await recipe.setUniqueHash();
+        },
+      },
     },
   );
   return Recipe;

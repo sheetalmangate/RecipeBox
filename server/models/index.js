@@ -12,4 +12,4 @@ Recipe.belongsToMany(User, { through: "userrecipes" });
 Recipe.hasOne(Nutrition);
 Nutrition.belongsTo(Recipe);
 
-export { User, Recipe, Nutrition };
+export { sequelize, User, Recipe, Nutrition };
