@@ -33,7 +33,7 @@ const Navbar = (props: LoginProps) => {
             <li className="nav-item">
               <Link to="/create">
                 <button type="button" id="create-ticket-link">
-                  New Ticket
+                  New Recipe
                 </button>
               </Link>
             </li>

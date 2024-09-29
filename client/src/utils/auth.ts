@@ -17,16 +17,16 @@ class AuthService {
   }
 
   getToken(): string {
-    const loggedUser = localStorage.getItem("id_token") || "";
+    const loggedUser = localStorage.getItem("recipe_box_token") || "";
     return loggedUser;
   }
 
   login(idToken: string) {
-    localStorage.setItem("id_token", idToken);
+    localStorage.setItem("recipe_box_token", idToken);
   }
 
   logout() {
-    localStorage.removeItem("id_token");
+    localStorage.removeItem("recipe_box_token");
   }
 }
 
