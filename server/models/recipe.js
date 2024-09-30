@@ -1,4 +1,5 @@
 import { DataTypes, Model } from "sequelize";
+import crypto from "crypto";
 
 export class Recipe extends Model {
   // Hash the title, ingredients, servings, and instructions to prevent duplicate recipes
@@ -10,6 +11,11 @@ export class Recipe extends Model {
     hash.update(this.instructions);
     this.unique_hash = hash.digest("hex");
   }
+
+  // setServings(servings) {
+  //   const servingsArray = servings.split("/d+/");
+  //   this.servings = parseInt(servingsArray[0], 10);
+  // }
 }
 
 export function RecipeFactory(sequelize) {
@@ -35,7 +41,7 @@ export function RecipeFactory(sequelize) {
         allowNull: false,
       },
       servings: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       instructions: {

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  searchRecipes,
   getAllRecipes,
   getRecipeById,
   getRecipeByHash,
@@ -10,6 +11,8 @@ import {
 
 const router = Router();
 
+// GET /recipes/search - Search for recipes by title
+router.get("/search/:title", searchRecipes);
 // GET /recipes - Get all recipes
 router.get("/", getAllRecipes);
 // GET /recipes/:id - Get a recipe by id

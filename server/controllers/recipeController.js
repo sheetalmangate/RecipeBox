@@ -1,5 +1,17 @@
 import { Recipe } from "../models/recipe.js";
+import RecipeService from "../service/recipeService.js";
 import crypto from "crypto";
+
+export const searchRecipes = async (req, res) => {
+  const { title } = req.params;
+  const recipeService = new RecipeService(title);
+  try {
+    const data = await recipeService.fetchRecipeData();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 export const getAllRecipes = async (req, res) => {
   try {
@@ -41,11 +53,21 @@ export const getRecipeByHash = async (req, res) => {
 };
 
 export const createRecipe = async (req, res) => {
+  const { title, ingredients, servings, instructions } = req.body;
+  const unique_hash = "";
+
   try {
-    const recipe = await Recipe.create(req.body);
-    res.status(201).json(recipe);
+    const newRecipe = await Recipe.create({
+      unique_hash,
+      title,
+      ingredients,
+      servings,
+      instructions,
+    });
+    res.status(201).json(newRecipe);
   } catch (error) {
-    res.status(422).json({ error: error.message });
+    // console.log(error);
+    res.status(400).json({ message: error.message });
   }
 };
 

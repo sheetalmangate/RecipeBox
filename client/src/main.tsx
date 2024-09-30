@@ -7,6 +7,8 @@ import Board from "./pages/Board.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import Register from "./pages/Register.tsx";
 import Login from "./pages/Login.tsx";
+import CreateRecipe from "./pages/CreateRecipe.tsx";
+import SearchRecipe from "./pages/SearchRecipes.tsx";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,11 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Board />,
+      },
+      { path: "/search", element: <SearchRecipe /> },
+      {
+        path: "/create",
+        element: <CreateRecipe />,
       },
       {
         path: "/register",
