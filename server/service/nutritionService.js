@@ -14,7 +14,7 @@ dotenv.config();
 // }
 
 class NutritionService {
-  constructor(ingredientsObject) {
+  constructor(ingredients) {
     this.baseURL = process.env.NUTRITION_BASE_URL || "";
     this.apiKey = process.env.NUTRITION_KEY || "";
     this.options = {
@@ -23,7 +23,7 @@ class NutritionService {
         "Content-Type": "application/json",
         "X-RapidAPI-Key": this.apiKey,
       },
-      body: JSON.stringify(ingredientsObject),
+      body: JSON.stringify(ingredients),
     };
   }
 
