@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [loginData, setLoginData] = useState({
     username: "",
+    email: "",
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
@@ -26,6 +27,7 @@ const Register = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
+      console.log("Registering account with: ", loginData);
       await register(loginData);
       navigate("/login");
     } catch (err) {
@@ -43,6 +45,13 @@ const Register = () => {
           type="text"
           name="username"
           value={loginData.username || ""}
+          onChange={handleChange}
+        />
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          value={loginData.email || ""}
           onChange={handleChange}
         />
         <label>Password</label>

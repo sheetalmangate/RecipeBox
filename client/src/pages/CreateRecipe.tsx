@@ -45,7 +45,6 @@ const CreateRecipe = () => {
     e.preventDefault();
     // make sure user is still logged in (i.e. token is still valid)
     if (auth.loggedIn()) {
-      console.log("newRecipe", newRecipe);
       if (newRecipe) {
         try {
           await createRecipe(newRecipe);

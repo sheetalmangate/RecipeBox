@@ -2,9 +2,9 @@ import { DataTypes, Model } from "sequelize";
 import bcrypt from "bcrypt";
 export class User extends Model {
   // Hash the password before saving the user
-  async setPassword(password) {
+  setPassword(password) {
     const saltRounds = 10;
-    this.password = await bcrypt.hash(password, saltRounds);
+    this.password = bcrypt.hashSync(password, saltRounds);
   }
 }
 
@@ -21,6 +21,11 @@ export function UserFactory(sequelize) {
         allowNull: false,
         unique: true,
       },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
       password: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -31,10 +36,10 @@ export function UserFactory(sequelize) {
       sequelize,
       hooks: {
         beforeCreate: async (user) => {
-          await user.setPassword(user.password);
+          user.setPassword(user.password);
         },
         beforeUpdate: async (user) => {
-          await user.setPassword(user.password);
+          user.setPassword(user.password);
         },
       },
     },
