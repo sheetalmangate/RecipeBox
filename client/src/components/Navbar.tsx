@@ -30,13 +30,13 @@ const Navbar = (props: LoginProps) => {
           </>
         ) : (
           <>
-            <li className="nav-item">
-              <Link to="/search">
-                <button type="button" id="create-ticket-link">
+            {location.pathname !== "/search" && (
+              <li className="nav-item ">
+                <Link className="btn-recipe " to="/search">
                   Search Recipes
-                </button>
-              </Link>
-            </li>
+                </Link>
+              </li>
+            )}
             {/* <li className="nav-item">
               <Link to="/create">
                 <button type="button" id="create-ticket-link">
@@ -47,6 +47,7 @@ const Navbar = (props: LoginProps) => {
             <li className="nav-item">
               <button
                 type="button"
+                className="btn btn-secondary btn-block"
                 onClick={() => {
                   auth.logout();
                   props.setLoggedIn(false);
