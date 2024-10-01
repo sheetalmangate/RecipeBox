@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 export class Recipe extends Model {
   // Hash the title, ingredients, servings, and instructions to prevent duplicate recipes
-  async setUniqueHash() {
+  setUniqueHash() {
     const hash = crypto.createHash("sha256");
     hash.update(this.title);
     hash.update(this.ingredients);
@@ -53,11 +53,11 @@ export function RecipeFactory(sequelize) {
       tableName: "recipes",
       sequelize,
       hooks: {
-        beforeCreate: async (recipe) => {
-          await recipe.setUniqueHash();
+        beforeCreate: (recipe) => {
+          recipe.setUniqueHash();
         },
-        beforeUpdate: async (recipe) => {
-          await recipe.setUniqueHash();
+        beforeUpdate: (recipe) => {
+          recipe.setUniqueHash();
         },
       },
     },
