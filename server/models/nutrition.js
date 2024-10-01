@@ -1,13 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 
-export class Nutrition extends Model {
-  constructor(title, ingredients, servings, instructions) {
-    this.title = title;
-    this.ingredients = ingredients;
-    this.servings = servings;
-    this.instructions = instructions;
-  }
-}
+export class Nutrition extends Model {}
 
 export function NutritionFactory(sequelize) {
   Nutrition.init(

@@ -18,25 +18,32 @@ const Navbar = (props: LoginProps) => {
         {!props.loggedIn ? (
           <>
             <li className="nav-item">
-              <Link to="/login">
-                <button type="button">Login</button>
+              <Link to="/register">
+                <button type="button">Register Account</button>
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/register">
-                <button type="button">Register Account</button>
+              <Link to="/login">
+                <button type="button">Login</button>
               </Link>
             </li>
           </>
         ) : (
           <>
             <li className="nav-item">
+              <Link to="/search">
+                <button type="button" id="create-ticket-link">
+                  Search Recipes
+                </button>
+              </Link>
+            </li>
+            {/* <li className="nav-item">
               <Link to="/create">
                 <button type="button" id="create-ticket-link">
                   New Recipe
                 </button>
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <button
                 type="button"

@@ -7,6 +7,7 @@ export class User extends Model {
     this.password = await bcrypt.hash(password, saltRounds);
   }
 }
+
 export function UserFactory(sequelize) {
   User.init(
     {
