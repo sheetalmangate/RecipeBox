@@ -1,5 +1,3 @@
-// import { UserData } from './UserData';
-
 export interface RecipeData {
   id: number | null;
   // unique_hash: string | null;
