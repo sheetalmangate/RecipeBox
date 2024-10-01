@@ -23,9 +23,9 @@ export const login = async (req, res) => {
 };
 
 export const register = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, email, password } = req.body;
   try {
-    const user = await User.create({ username, password });
+    const user = await User.create({ username, email, password });
     return res.status(201).json(user);
   } catch (error) {
     return res.status(422).json({ error: error.message });

@@ -27,7 +27,7 @@ class NutritionService {
     };
   }
 
-  async fetchNutritionData(title) {
+  async fetchNutritionData() {
     try {
       const response = await fetch(this.baseURL, this.options);
       if (response.ok) {
