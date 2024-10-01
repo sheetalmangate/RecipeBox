@@ -15,6 +15,7 @@ const sequelize = process.env.DB_URL
         dialectOptions: {
           decimalNumbers: true,
         },
+        logging: false, ///////////   set to true to see the SQL queries
       },
     );
 

@@ -41,7 +41,7 @@ export function RecipeFactory(sequelize) {
         allowNull: false,
       },
       servings: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       instructions: {

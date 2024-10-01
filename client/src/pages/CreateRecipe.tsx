@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { createRecipe } from "../api/recipeAPI";
+import { saveRecipe } from "../api/recipeAPI";
 import { RecipeData } from "../interfaces/RecipeData";
 // import { UserData } from "../interfaces/UserData";
 // import { retrieveUsers } from "../api/userAPI";
@@ -9,11 +9,11 @@ import LoginProps from "../interfaces/LoginProps";
 
 const CreateRecipe = () => {
   const [newRecipe, setNewRecipe] = useState<RecipeData | undefined>({
-    id: 0,
+    // id: 0,
     // unique_hash: "",
     title: "",
     ingredients: "",
-    servings: 0,
+    servings: "",
     instructions: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
@@ -47,7 +47,7 @@ const CreateRecipe = () => {
     if (auth.loggedIn()) {
       if (newRecipe) {
         try {
-          await createRecipe(newRecipe);
+          await saveRecipe(newRecipe);
           navigate("/");
         } catch (err) {
           setErrorMessage("All fields are required.");

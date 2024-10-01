@@ -16,7 +16,7 @@ class RecipeService {
     };
   }
 
-  async fetchRecipeData(title) {
+  async fetchRecipeData() {
     try {
       const response = await fetch(
         `${this.baseURL}?${this.params}`,

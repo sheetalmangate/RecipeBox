@@ -1,13 +1,15 @@
-import { useState, useEffect, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { searchRecipes } from "../api/recipeAPI";
-// import { RecipeData } from "../interfaces/RecipeData";
+import { searchNutrition } from "../api/nutritionAPI";
+import { RecipeData } from "../interfaces/RecipeData";
+import { NutritionData } from "../interfaces/NutritionData";
 // import { UserData } from "../interfaces/UserData";
 // import { retrieveUsers } from "../api/userAPI";
 import auth from "../utils/auth";
 import LoginProps from "../interfaces/LoginProps";
 
-const SearchRecipe = () => {
+const DevTest = () => {
   const [recipeTitle, setRecipeTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -19,8 +21,16 @@ const SearchRecipe = () => {
     if (auth.loggedIn()) {
       if (recipeTitle) {
         try {
-          const recipes = await searchRecipes(recipeTitle);
-          console.log("recipes", recipes);
+          const recipes: RecipeData[] = await searchRecipes(recipeTitle);
+          const ingredients = recipes[0].ingredients || "";
+
+          console.log("recipe", recipes[0]);
+          const nutrition: NutritionData = await searchNutrition(
+            ingredients,
+            recipes[0].servings || "",
+          );
+
+          console.log("nutrition", nutrition);
           // navigate("/");
         } catch (err) {
           setErrorMessage("Recipe title is required.");
@@ -60,4 +70,4 @@ const SearchRecipe = () => {
   );
 };
 
-export default SearchRecipe;
+export default DevTest;

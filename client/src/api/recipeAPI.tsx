@@ -22,6 +22,29 @@ const searchRecipes = async (title: string): Promise<RecipeData[]> => {
   }
 };
 
+const saveRecipe = async (body: RecipeData) => {
+  try {
+    const response = await fetch("/api/recipes/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Auth.getToken()}`,
+      },
+      body: JSON.stringify(body),
+    });
+    const data = response.json();
+
+    if (!response.ok) {
+      throw new Error("invalid API response, check network tab!");
+    }
+
+    return data;
+  } catch (err) {
+    console.log("Error from Recipe Creation: ", err);
+    return Promise.reject("Could not create recipe");
+  }
+};
+
 const retrieveRecipes = async () => {
   try {
     const response = await fetch("/api/recipes/", {
@@ -61,29 +84,6 @@ const retrieveRecipe = async (id: number | null): Promise<RecipeData> => {
   } catch (err) {
     console.log("Error from data retrieval: ", err);
     return Promise.reject("Could not fetch singular recipe");
-  }
-};
-
-const createRecipe = async (body: RecipeData) => {
-  try {
-    const response = await fetch("/api/recipes/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${Auth.getToken()}`,
-      },
-      body: JSON.stringify(body),
-    });
-    const data = response.json();
-
-    if (!response.ok) {
-      throw new Error("invalid API response, check network tab!");
-    }
-
-    return data;
-  } catch (err) {
-    console.log("Error from Recipe Creation: ", err);
-    return Promise.reject("Could not create recipe");
   }
 };
 
@@ -137,7 +137,7 @@ const deleteRecipe = async (recipeId: number): Promise<ApiMessage> => {
 
 export {
   searchRecipes,
-  createRecipe,
+  saveRecipe,
   deleteRecipe,
   retrieveRecipes,
   retrieveRecipe,

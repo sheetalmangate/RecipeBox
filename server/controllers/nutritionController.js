@@ -17,7 +17,7 @@ export const getNutritionByRecipeId = async (req, res) => {
   }
 };
 
-export const createNutrition = async (req, res) => {
+export const saveNutrition = async (req, res) => {
   const {
     servings,
     dietlabels,
@@ -53,10 +53,12 @@ export const createNutrition = async (req, res) => {
 };
 
 export const searchNutrition = async (req, res) => {
-  const { ingredients } = req.params;
-  const recipeService = new NutritionService(ingredients);
+  //   const { ingredients } = req.params;
+  const { ingredients } = req.body;
+
+  const nutritionService = new NutritionService(ingredients);
   try {
-    const data = await recipeService.fetchNutritionData();
+    const data = await nutritionService.fetchNutritionData();
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: error.message });
