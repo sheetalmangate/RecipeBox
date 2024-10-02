@@ -32,11 +32,12 @@ const DevTest = () => {
           const recipes: RecipeData[] = await searchRecipes(recipeTitle);
           console.log("recipes", recipes);
           // const ingredients = recipes[0].ingredients || "";
+          const num = 1;
           const myRecipe = await saveRecipe({
-            title: recipes[0].title,
-            ingredients: recipes[0].ingredients,
-            servings: recipes[0].servings,
-            instructions: recipes[0].instructions,
+            title: recipes[num].title,
+            ingredients: recipes[num].ingredients,
+            servings: recipes[num].servings,
+            instructions: recipes[num].instructions,
           });
           console.log("myrecipe", myRecipe);
           // const nutrition: NutritionData = await searchNutrition(

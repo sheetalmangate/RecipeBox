@@ -1,7 +1,6 @@
 import { Recipe } from "../models/recipe.js";
 import { User } from "../models/user.js";
 import RecipeService from "../service/recipeService.js";
-// import NutritionService from "../service/nutritionService.js";
 import crypto from "crypto";
 
 function getUniqueHash(title, ingredients, servings, instructions) {
@@ -19,23 +18,28 @@ export const searchRecipes = async (req, res) => {
   // Find the user by id
   const user = await User.findByPk(id);
   const recipeService = new RecipeService(title);
+
   try {
     const recipes = await recipeService.fetchRecipeData();
     const userRecipes = await user.getRecipes();
-    // Check if the recipe is already saved by the user
+    // Check if each recipe is already saved by the user
     for (let i = 0; i < recipes.length; i++) {
+      // Initialize the saved flag to false
       recipes[i].saved = false;
+      // Get the unique hash for the recipe
       const unique_hash = getUniqueHash(
         recipes[i].title,
         recipes[i].ingredients,
         recipes[i].servings,
         recipes[i].instructions,
       );
-      for (let j = 0; j < userRecipes.length; j++) {
-        // if the recipe is already saved, set the saved flag to true
-        if (unique_hash === userRecipes[j].unique_hash) {
-          recipes[i].saved = true;
-        }
+      // Check if the recipe is already in the database
+      const recipe = await Recipe.findOne({
+        where: { unique_hash: unique_hash },
+      });
+      // If the user has already saved the recipe, set the saved flag to true
+      if (await user.hasRecipe(recipe)) {
+        recipes[i].saved = true;
       }
     }
     res.json(recipes);
@@ -52,7 +56,6 @@ export const retrieveRecipes = async (req, res) => {
   try {
     // Get all the recipes for the user
     const recipes = await user.getRecipes();
-
     res.json(recipes);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -62,7 +65,10 @@ export const retrieveRecipes = async (req, res) => {
 export const saveRecipe = async (req, res) => {
   const { title, ingredients, servings, instructions } = req.body;
   const { id } = req.user;
+  // Get the unique hash for the recipe
   const unique_hash = getUniqueHash(title, ingredients, servings, instructions);
+  // Find the user by id
+  const user = await User.findByPk(id);
 
   try {
     const [recipe, created] = await Recipe.findOrCreate({
@@ -74,15 +80,10 @@ export const saveRecipe = async (req, res) => {
         instructions: instructions,
       },
     });
-
-    // Find the user by id
-    const myuser = await User.findByPk(id);
     // Add the recipe to the user's recipes
-    myuser.addRecipe(recipe);
-
+    user.addRecipe(recipe);
     res.status(201).json(recipe);
   } catch (error) {
-    // console.log(error);
     res.status(400).json({ message: error.message });
   }
   // }
