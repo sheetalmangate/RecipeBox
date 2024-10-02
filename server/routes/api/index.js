@@ -7,6 +7,6 @@ const router = Router();
 
 router.use("/users", userRouter);
 router.use("/recipes", recipeRouter);
-router.use("/nutritions", nutritionRouter);
+router.use("/nutrition", nutritionRouter);
 
 export default router;

@@ -9,6 +9,7 @@ import Register from "./pages/Register.tsx";
 import Login from "./pages/Login.tsx";
 import CreateRecipe from "./pages/CreateRecipe.tsx";
 import SearchRecipe from "./pages/SearchRecipes.tsx";
+import DevTest from "./pages/DevPage.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         element: <Board />,
       },
       { path: "/search", element: <SearchRecipe /> },
+      {
+        path: "/test",
+        element: <DevTest />,
+      },
       {
         path: "/create",
         element: <CreateRecipe />,
