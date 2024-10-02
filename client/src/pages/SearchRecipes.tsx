@@ -89,8 +89,8 @@ const SearchRecipe = () => {
           <h2>Search Results</h2>
           {searchResults.length > 0 ? (
             <div className="row">
-              {searchResults.map((recipe) => (
-                <div className="col-md-4 mb-4" key={recipe.id}>
+              {searchResults.map((recipe, index) => (
+                <div className="col-md-4 mb-4" key={index}>
                   <div className="card h-100 d-flex flex-column">
                     <div className="card-body d-flex flex-column">
                       <h3 className="card-title">{recipe.title}</h3>

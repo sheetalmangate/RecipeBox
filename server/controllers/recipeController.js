@@ -52,7 +52,7 @@ export const getRecipeByHash = async (req, res) => {
   }
 };
 
-export const createRecipe = async (req, res) => {
+export const saveRecipe = async (req, res) => {
   const { title, ingredients, servings, instructions } = req.body;
   const unique_hash = "";
 

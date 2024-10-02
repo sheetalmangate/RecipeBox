@@ -16,13 +16,12 @@ class RecipeService {
     };
   }
 
-  buildRecipeQuery() {
-    return `${this.baseURL}?${this.params}`;
-  }
-
-  async fetchRecipeData(title) {
+  async fetchRecipeData() {
     try {
-      const response = await fetch(this.buildRecipeQuery(title), this.options);
+      const response = await fetch(
+        `${this.baseURL}?${this.params}`,
+        this.options,
+      );
       if (response.ok) {
         const data = await response.json();
         return data;

@@ -4,7 +4,7 @@ import {
   getAllRecipes,
   getRecipeById,
   getRecipeByHash,
-  createRecipe,
+  saveRecipe,
   updateRecipe,
   deleteRecipe,
 } from "../../controllers/recipeController.js";
@@ -19,8 +19,8 @@ router.get("/", getAllRecipes);
 router.get("/:id", getRecipeById);
 // GET /recipes/hash/:unique_hash - Get a recipe by unique_hash
 router.get("/hash/:unique_hash", getRecipeByHash);
-// POST /recipes - Create a new recipe
-router.post("/", createRecipe);
+// POST /recipes - Save a new recipe
+router.post("/", saveRecipe);
 // PUT /recipes/:id - Update a recipe by id
 router.put("/:id", updateRecipe);
 // DELETE /recipes/:id - Delete a recipe by id
