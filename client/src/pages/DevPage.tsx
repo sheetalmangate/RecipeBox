@@ -33,13 +33,16 @@ const DevTest = () => {
           console.log("recipes", recipes);
           // const ingredients = recipes[0].ingredients || "";
           const num = 1;
-          const myRecipe = await saveRecipe({
-            title: recipes[num].title,
-            ingredients: recipes[num].ingredients,
-            servings: recipes[num].servings,
-            instructions: recipes[num].instructions,
-          });
-          console.log("myrecipe", myRecipe);
+          // the API can return 0 - 10 recipes, so we need to check if the recipe exists
+          if (recipes.length >= num) {
+            const myRecipe = await saveRecipe({
+              title: recipes[num].title,
+              ingredients: recipes[num].ingredients,
+              servings: recipes[num].servings,
+              instructions: recipes[num].instructions,
+            });
+            console.log("myrecipe", myRecipe);
+          }
           // const nutrition: NutritionData = await searchNutrition(
           //   ingredients,
           //   recipes[0].servings || "",
