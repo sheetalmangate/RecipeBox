@@ -1,6 +1,6 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { searchRecipes } from "../api/recipeAPI";
+import { saveRecipe, searchRecipes } from "../api/recipeAPI";
 import { searchNutrition } from "../api/nutritionAPI";
 import { RecipeData } from "../interfaces/RecipeData";
 import { NutritionData } from "../interfaces/NutritionData";
@@ -23,8 +23,13 @@ const DevTest = () => {
         try {
           const recipes: RecipeData[] = await searchRecipes(recipeTitle);
           const ingredients = recipes[0].ingredients || "";
-
-          console.log("recipe", recipes[0]);
+          const myRecipe = await saveRecipe({
+            title: recipes[0].title,
+            ingredients: recipes[0].ingredients,
+            servings: recipes[0].servings,
+            instructions: recipes[0].instructions,
+          });
+          console.log("myrecipe", myRecipe);
           const nutrition: NutritionData = await searchNutrition(
             ingredients,
             recipes[0].servings || "",

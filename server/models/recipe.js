@@ -11,11 +11,6 @@ export class Recipe extends Model {
     hash.update(this.instructions);
     this.unique_hash = hash.digest("hex");
   }
-
-  // setServings(servings) {
-  //   const servingsArray = servings.split("/d+/");
-  //   this.servings = parseInt(servingsArray[0], 10);
-  // }
 }
 
 export function RecipeFactory(sequelize) {

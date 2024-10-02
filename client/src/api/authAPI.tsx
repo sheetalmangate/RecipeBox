@@ -19,6 +19,7 @@ const login = async (userInfo: UserLogin) => {
 
     // Parse the response body as JSON
     const data = await response.json();
+    console.log("data", data);
 
     return data; // Return the data received from the server
   } catch (err) {
