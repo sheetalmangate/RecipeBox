@@ -23,7 +23,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   // NOTE: Change to false when you have finalized your models
   app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
