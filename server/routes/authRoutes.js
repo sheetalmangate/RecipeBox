@@ -8,6 +8,7 @@ export const login = async (req, res) => {
   const user = await User.findOne({
     where: { username },
   });
+  const id = user.dataValues.id;
 
   if (!user) {
     return res.status(401).json({ message: "Authentication failed" });
@@ -18,7 +19,7 @@ export const login = async (req, res) => {
     return res.status(401).json({ message: "Authentication failed" });
   }
   const secretKey = process.env.JWT_SECRET_KEY || "";
-  const token = jwt.sign({ username }, secretKey, { expiresIn: "1h" });
+  const token = jwt.sign({ id, username }, secretKey, { expiresIn: "1h" });
   return res.json({ token });
 };
 

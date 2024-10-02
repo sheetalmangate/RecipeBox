@@ -1,6 +1,16 @@
 import { Recipe } from "../models/recipe.js";
+import { User } from "../models/user.js";
 import RecipeService from "../service/recipeService.js";
 import crypto from "crypto";
+
+function getUniqueHash(title, ingredients, servings, instructions) {
+  const hash = crypto.createHash("sha256");
+  hash.update(title);
+  hash.update(ingredients);
+  hash.update(servings);
+  hash.update(instructions);
+  return hash.digest("hex");
+}
 
 export const searchRecipes = async (req, res) => {
   const { title } = req.params;
@@ -54,20 +64,32 @@ export const getRecipeByHash = async (req, res) => {
 
 export const saveRecipe = async (req, res) => {
   const { title, ingredients, servings, instructions } = req.body;
-  const unique_hash = "";
+  const { id } = req.user;
+  // console.log("id", id);
+  const unique_hash = getUniqueHash(title, ingredients, servings, instructions);
+  const recipe = await Recipe.findOne({
+    where: { unique_hash: unique_hash },
+  });
+  const myuser = await User.findByPk(id); // Find the user by id
 
-  try {
-    const newRecipe = await Recipe.create({
-      unique_hash,
-      title,
-      ingredients,
-      servings,
-      instructions,
-    });
-    res.status(201).json(newRecipe);
-  } catch (error) {
-    // console.log(error);
-    res.status(400).json({ message: error.message });
+  if (recipe) {
+    myuser.addRecipe(recipe); // Add the recipe to the user's recipes
+    return res.status(201).json(recipe);
+  } else {
+    try {
+      const newRecipe = await Recipe.create({
+        unique_hash,
+        title,
+        ingredients,
+        servings,
+        instructions,
+      });
+      myuser.addRecipe(newRecipe); // Add the recipe to the user's recipes
+      res.status(201).json(newRecipe);
+    } catch (error) {
+      // console.log(error);
+      res.status(400).json({ message: error.message });
+    }
   }
 };
 
