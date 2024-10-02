@@ -114,7 +114,7 @@ const SearchRecipe = () => {
               ))}
             </div>
           ) : (
-            <p>No recipes found.</p>
+            <p>No recipes found {recipeTitle && ` for "${recipeTitle}"`}.</p>
           )}
         </div>
       </div>
