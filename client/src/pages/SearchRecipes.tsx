@@ -5,11 +5,16 @@ import { RecipeData } from "../interfaces/RecipeData";
 import auth from "../utils/auth";
 import LoginProps from "../interfaces/LoginProps";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { searchNutrition } from "../api/nutritionAPI";
+import NutritionShowData from "../components/NutritionShowData";
 
 const SearchRecipe = () => {
   const [recipeTitle, setRecipeTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [searchResults, setSearchResults] = useState<RecipeData[]>([]); // State to store search results
+  const [nutritionData, setNutritionData] = useState<{ [key: number]: any }>(
+    {},
+  );
   const navigate = useNavigate();
   const { setLoggedIn }: LoginProps = useOutletContext();
 
@@ -57,6 +62,20 @@ const SearchRecipe = () => {
     }
   };
 
+  const handleShowNutrition = async (
+    ingredients: string,
+    servings: string,
+    index: number,
+  ) => {
+    try {
+      const nutrition = await searchNutrition(ingredients, servings);
+      setNutritionData((prevData) => ({ ...prevData, [index]: nutrition }));
+    } catch (err) {
+      console.log("Failed to get nutrition data", err);
+      setErrorMessage("Failed to get nutrition data");
+    }
+  };
+
   return (
     <>
       <div className="container mt-5">
@@ -90,24 +109,51 @@ const SearchRecipe = () => {
           {searchResults.length > 0 ? (
             <div className="row">
               {searchResults.map((recipe, index) => (
-                <div className="col-md-4 mb-4" key={index}>
+                <div className="col-12 mb-4" key={index}>
                   <div className="card h-100 d-flex flex-column">
                     <div className="card-body d-flex flex-column">
-                      <h3 className="card-title">{recipe.title}</h3>
+                      <h3 className="card-title text-center">{recipe.title}</h3>
                       <p className="card-text">
                         <strong>Ingredients:</strong> {recipe.ingredients}
                       </p>
                       <p className="card-text">
                         <strong>Servings:</strong> {recipe.servings}
                       </p>
-                      <div className="mt-auto">
+                      <p className="card-text">
+                        <strong>Instructions:</strong> {recipe.instructions}
+                      </p>
+                      <div className="mt-auto d-flex justify-content-between">
                         <button
                           className="btn btn-success"
                           onClick={() => handleSaveRecipe(recipe)}
                         >
                           Add to Recipe Box
                         </button>
+
+                        <button
+                          className="btn btn-success"
+                          onClick={() => {
+                            if (recipe.ingredients && recipe.servings) {
+                              handleShowNutrition(
+                                recipe.ingredients,
+                                recipe.servings,
+                                index,
+                              );
+                            } else {
+                              setErrorMessage(
+                                "Ingredients and servings are required to show nutrition data.",
+                              );
+                            }
+                          }}
+                        >
+                          {nutritionData[index]
+                            ? "Hide Nutrition"
+                            : "Show Nutrition"}
+                        </button>
                       </div>
+                      {nutritionData[index] && (
+                        <NutritionShowData data={nutritionData[index]} />
+                      )}
                     </div>
                   </div>
                 </div>
