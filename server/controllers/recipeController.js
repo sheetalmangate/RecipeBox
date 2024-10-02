@@ -21,7 +21,6 @@ export const searchRecipes = async (req, res) => {
 
   try {
     const recipes = await recipeService.fetchRecipeData();
-    const userRecipes = await user.getRecipes();
     // Check if each recipe is already saved by the user
     for (let i = 0; i < recipes.length; i++) {
       // Initialize the saved flag to false
