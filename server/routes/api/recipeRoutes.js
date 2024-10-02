@@ -23,7 +23,7 @@ router.get("/hash/:unique_hash", getRecipeByHash);
 // POST /recipes - Create a new recipe
 router.post("/", createRecipe);
 // POST /recipes/share - Share a recipe
-router.post("/share", shareRecipe);
+router.post("/share/:id/:user_id", shareRecipe);
 // PUT /recipes/:id - Update a recipe by id
 router.put("/:id", updateRecipe);
 // DELETE /recipes/:id - Delete a recipe by id

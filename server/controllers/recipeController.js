@@ -1,4 +1,4 @@
-import { Recipe } from "../models/recipe.js";
+import { Recipe,User } from "../models/index.js";
 import RecipeService from "../service/recipeService.js";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
@@ -120,23 +120,29 @@ export const deleteRecipe = async (req, res) => {
   }
 };
 export const shareRecipe = async (req, res) => {
-  const { id } = req.params;
+  const { id, user_id } = req.params;
   try {
-    const recipe = await Recipe.findByPk(id);
-    if (recipe) {
+    // const recipe = await Recipe.findByPk(id);
+    // const user = await User.findByPk(user_id);
+    const recipe = {title: "test", servings: 4, ingredients: "test", instructions: "test"};
+    const user = {email: "test@test.com", username: "test"};
+    if (recipe && user) {
         const info = await transporter.sendMail({
-          from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', // sender address
+          from: `${user.email}`, // sender address
           to: "bar@example.com, baz@example.com", // list of receivers
           subject: "Check out this recipe ------", // Subject line
           text: "Hello world?", // plain text body
           html: `<h1>${recipe.title}</h1>
-          <p>${recipe.servings}</p>
-          <p>${recipe.ingredients}</p>
-          <p>${recipe.instructions}</p>`
+          <p>Serves: ${recipe.servings}</p>
+          <p>Ingredients: ${recipe.ingredients}</p>
+          <p>Instructions: ${recipe.instructions}</p>
+          <p>From: ${user.username}</p>
+          `
           , // html body
         });
 
         console.log("Message sent: %s", info.messageId);
+        res.status(200).json({ message: "Recipe shared" });
     } else {
       res.status(404).json({ error: "Recipe not found" });
     }
