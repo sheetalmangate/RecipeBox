@@ -1,7 +1,7 @@
 import { Recipe } from "../models/recipe.js";
 import { User } from "../models/user.js";
 import RecipeService from "../service/recipeService.js";
-import NutritionService from "../service/nutritionService.js";
+// import NutritionService from "../service/nutritionService.js";
 import crypto from "crypto";
 
 function getUniqueHash(title, ingredients, servings, instructions) {

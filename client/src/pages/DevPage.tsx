@@ -1,9 +1,9 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, useEffect, ChangeEvent } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { saveRecipe, retrieveRecipes, searchRecipes } from "../api/recipeAPI";
-import { searchNutrition } from "../api/nutritionAPI";
+// import { searchNutrition } from "../api/nutritionAPI";
 import { RecipeData } from "../interfaces/RecipeData";
-import { NutritionData } from "../interfaces/NutritionData";
+// import { NutritionData } from "../interfaces/NutritionData";
 // import { UserData } from "../interfaces/UserData";
 // import { retrieveUsers } from "../api/userAPI";
 import auth from "../utils/auth";
@@ -15,6 +15,14 @@ const DevTest = () => {
   const navigate = useNavigate();
   const { setLoggedIn }: LoginProps = useOutletContext();
 
+  useEffect(() => {
+    // make sure user is still logged in (i.e. token is still valid)
+    if (!auth.loggedIn()) {
+      setLoggedIn(false);
+      navigate("/login");
+    }
+  }, []);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     // make sure user is still logged in (i.e. token is still valid)
@@ -23,7 +31,7 @@ const DevTest = () => {
         try {
           const recipes: RecipeData[] = await searchRecipes(recipeTitle);
           console.log("recipes", recipes);
-          const ingredients = recipes[0].ingredients || "";
+          // const ingredients = recipes[0].ingredients || "";
           const myRecipe = await saveRecipe({
             title: recipes[0].title,
             ingredients: recipes[0].ingredients,
