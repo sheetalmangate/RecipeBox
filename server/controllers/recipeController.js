@@ -141,10 +141,10 @@ export const deleteRecipe = async (req, res) => {
   }
 };
 export const shareRecipe = async (req, res) => {
-  const { id, user_id } = req.params;
+  const { id,} = req.params;
   try {
     const recipe = await Recipe.findByPk(id);
-    const user = await User.findByPk(user_id);
+    const {user} = req;
     // const recipe = {title: "test", servings: 4, ingredients: "test", instructions: "test"};
     // const user = {email: "test@test.com", username: "test"};
     if (recipe && user) {

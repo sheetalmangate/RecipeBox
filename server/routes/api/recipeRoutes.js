@@ -8,7 +8,7 @@ import {
   updateRecipe,
   deleteRecipe,
   shareRecipe,
-  createRecipe,
+  // createRecipe,
 } from "../../controllers/recipeController.js";
 
 const router = Router();
@@ -22,9 +22,9 @@ router.get("/:id", getRecipeById);
 // GET /recipes/hash/:unique_hash - Get a recipe by unique_hash
 router.get("/hash/:unique_hash", getRecipeByHash);
 // POST /recipes - Create a new recipe
-router.post("/", createRecipe);
+// router.post("/", createRecipe);
 // POST /recipes/share - Share a recipe
-router.post("/share/:id/:user_id", shareRecipe);
+router.post("/share/:id", shareRecipe);
 // POST /recipes - Save a new recipe
 router.post("/", saveRecipe);
 // PUT /recipes/:id - Update a recipe by id
