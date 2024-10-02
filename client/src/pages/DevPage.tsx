@@ -1,6 +1,6 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { saveRecipe, searchRecipes } from "../api/recipeAPI";
+import { saveRecipe, retrieveRecipes, searchRecipes } from "../api/recipeAPI";
 import { searchNutrition } from "../api/nutritionAPI";
 import { RecipeData } from "../interfaces/RecipeData";
 import { NutritionData } from "../interfaces/NutritionData";
@@ -36,6 +36,8 @@ const DevTest = () => {
           );
 
           console.log("nutrition", nutrition);
+          const allrecipes = await retrieveRecipes();
+          console.log("allrecipes", allrecipes);
           // navigate("/");
         } catch (err) {
           setErrorMessage("Recipe title is required.");
