@@ -22,6 +22,7 @@ const DevTest = () => {
       if (recipeTitle) {
         try {
           const recipes: RecipeData[] = await searchRecipes(recipeTitle);
+          console.log("recipes", recipes);
           const ingredients = recipes[0].ingredients || "";
           const myRecipe = await saveRecipe({
             title: recipes[0].title,
@@ -30,12 +31,12 @@ const DevTest = () => {
             instructions: recipes[0].instructions,
           });
           console.log("myrecipe", myRecipe);
-          const nutrition: NutritionData = await searchNutrition(
-            ingredients,
-            recipes[0].servings || "",
-          );
+          // const nutrition: NutritionData = await searchNutrition(
+          //   ingredients,
+          //   recipes[0].servings || "",
+          // );
 
-          console.log("nutrition", nutrition);
+          // console.log("nutrition", nutrition);
           const allrecipes = await retrieveRecipes();
           console.log("allrecipes", allrecipes);
           // navigate("/");

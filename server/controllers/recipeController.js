@@ -15,10 +15,30 @@ function getUniqueHash(title, ingredients, servings, instructions) {
 
 export const searchRecipes = async (req, res) => {
   const { title } = req.params;
+  const { id } = req.user;
+  // Find the user by id
+  const user = await User.findByPk(id);
   const recipeService = new RecipeService(title);
   try {
-    const data = await recipeService.fetchRecipeData();
-    res.json(data);
+    const recipes = await recipeService.fetchRecipeData();
+    const userRecipes = await user.getRecipes();
+    // Check if the recipe is already saved by the user
+    for (let i = 0; i < recipes.length; i++) {
+      recipes[i].saved = false;
+      const unique_hash = getUniqueHash(
+        recipes[i].title,
+        recipes[i].ingredients,
+        recipes[i].servings,
+        recipes[i].instructions,
+      );
+      for (let j = 0; j < userRecipes.length; j++) {
+        // if the recipe is already saved, set the saved flag to true
+        if (unique_hash === userRecipes[j].unique_hash) {
+          recipes[i].saved = true;
+        }
+      }
+    }
+    res.json(recipes);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -48,7 +68,6 @@ export const saveRecipe = async (req, res) => {
     const [recipe, created] = await Recipe.findOrCreate({
       where: { unique_hash: unique_hash },
       defaults: {
-        // unique_hash: unique_hash,
         title: title,
         ingredients: ingredients,
         servings: servings,
