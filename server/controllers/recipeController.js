@@ -14,49 +14,48 @@ function getUniqueHash(title, ingredients, servings, instructions) {
 
 export const searchRecipes = async (req, res) => {
   const { title } = req.params;
+  const { id } = req.user;
+  // Find the user by id
+  const user = await User.findByPk(id);
   const recipeService = new RecipeService(title);
-  try {
-    const data = await recipeService.fetchRecipeData();
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
 
-export const getAllRecipes = async (req, res) => {
   try {
-    const recipes = await Recipe.findAll();
+    const recipes = await recipeService.fetchRecipeData();
+    // Check if each recipe is already saved by the user
+    for (let i = 0; i < recipes.length; i++) {
+      // Initialize the saved flag to false
+      recipes[i].saved = false;
+      // Get the unique hash for the recipe
+      const unique_hash = getUniqueHash(
+        recipes[i].title,
+        recipes[i].ingredients,
+        recipes[i].servings,
+        recipes[i].instructions,
+      );
+      // Check if the recipe is already in the database
+      const recipe = await Recipe.findOne({
+        where: { unique_hash: unique_hash },
+      });
+      // If the user has already saved the recipe, set the saved flag to true
+      if (await user.hasRecipe(recipe)) {
+        recipes[i].saved = true;
+      }
+    }
     res.json(recipes);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-export const getRecipeById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const recipe = await Recipe.findByPk(id);
-    if (recipe) {
-      res.json(recipe);
-    } else {
-      res.status(404).json({ error: "Recipe not found" });
-    }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+export const retrieveRecipes = async (req, res) => {
+  const { id } = req.user;
+  // Find the user by id
+  const user = await User.findByPk(id);
 
-export const getRecipeByHash = async (req, res) => {
   try {
-    const { unique_hash } = req.params;
-    const recipe = await Recipe.findOne({
-      where: { unique_hash: unique_hash },
-    });
-    if (recipe) {
-      res.json(recipe);
-    } else {
-      res.status(404).json({ error: "Recipe not found" });
-    }
+    // Get all the recipes for the user
+    const recipes = await user.getRecipes();
+    res.json(recipes);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -65,69 +64,26 @@ export const getRecipeByHash = async (req, res) => {
 export const saveRecipe = async (req, res) => {
   const { title, ingredients, servings, instructions } = req.body;
   const { id } = req.user;
-  // console.log("id", id);
+  // Get the unique hash for the recipe
   const unique_hash = getUniqueHash(title, ingredients, servings, instructions);
-  const recipe = await Recipe.findOne({
-    where: { unique_hash: unique_hash },
-  });
-  const myuser = await User.findByPk(id); // Find the user by id
+  // Find the user by id
+  const user = await User.findByPk(id);
 
-  if (recipe) {
-    myuser.addRecipe(recipe); // Add the recipe to the user's recipes
-    return res.status(201).json(recipe);
-  } else {
-    try {
-      const newRecipe = await Recipe.create({
-        unique_hash,
-        title,
-        ingredients,
-        servings,
-        instructions,
-      });
-      myuser.addRecipe(newRecipe); // Add the recipe to the user's recipes
-      res.status(201).json(newRecipe);
-    } catch (error) {
-      // console.log(error);
-      res.status(400).json({ message: error.message });
-    }
-  }
-};
-
-export const updateRecipe = async (req, res) => {
-  const { id } = req.params;
-  const { title, ingredients, servings, instructions } = req.body;
   try {
-    const recipe = await Recipe.findByPk(id);
-    if (recipe) {
-      recipe.title = title;
-      recipe.ingredients = ingredients;
-      recipe.servings = servings;
-      recipe.instructions = instructions;
-      // recipe.unique_hash = crypto
-      //   .createHash("sha256")
-      //   .update(title + ingredients + servings + instructions)
-      //   .digest("hex");
-      await recipe.save();
-      res.json(recipe);
-    } else {
-      res.status(404).json({ error: "Recipe not found" });
-    }
+    const [recipe, created] = await Recipe.findOrCreate({
+      where: { unique_hash: unique_hash },
+      defaults: {
+        title: title,
+        ingredients: ingredients,
+        servings: servings,
+        instructions: instructions,
+      },
+    });
+    // Add the recipe to the user's recipes
+    user.addRecipe(recipe);
+    res.status(201).json(recipe);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(400).json({ message: error.message });
   }
-};
-
-export const deleteRecipe = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const recipe = await Recipe.findByPk(id);
-    if (recipe) {
-      await recipe.destroy();
-      res.json({ message: "Recipe deleted" });
-    } else {
-      res.status(404).json({ error: "Recipe not found" });
-    }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+  // }
 };

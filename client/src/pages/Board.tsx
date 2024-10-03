@@ -1,32 +1,18 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 import LoginProps from "../interfaces/LoginProps";
 
 import auth from "../utils/auth";
 
 const Board = () => {
-  const [error, setError] = useState(false);
-  const navigate = useNavigate();
   const { loggedIn, setLoggedIn }: LoginProps = useOutletContext();
 
   useEffect(() => {
-    const checkLoggedIn = async () => {
-      try {
-        const token = auth.getToken();
-        if (token) {
-          setLoggedIn(true);
-        }
-      } catch (err) {
-        setError(true);
-        console.error("Failed to check if logged in", err);
-      }
-    };
-    checkLoggedIn();
-  });
-
-  if (error) {
-    navigate("/login");
-  }
+    // make sure user is still logged in (i.e. token is still valid)
+    if (!auth.loggedIn()) {
+      setLoggedIn(false);
+    }
+  }, []);
 
   return (
     <>

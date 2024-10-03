@@ -47,13 +47,11 @@ export const saveNutrition = async (req, res) => {
     });
     res.status(201).json(newRecipe);
   } catch (error) {
-    // console.log(error);
     res.status(400).json({ message: error.message });
   }
 };
 
 export const searchNutrition = async (req, res) => {
-  //   const { ingredients } = req.params;
   const { ingredients } = req.body;
 
   const nutritionService = new NutritionService(ingredients);
