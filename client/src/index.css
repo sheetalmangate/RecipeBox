@@ -12,6 +12,25 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.bg-image {
+  background-image: url("../../public/RecipeBox.jpg"); /* Update with the correct path to your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Ensure the container takes up the full height of the viewport */
+}
+
+.transparent-bg {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.5
+  ); /* White background with 50% opacity */
+  padding: 20px; /* Optional: Add some padding */
+  border-radius: 8px; /* Optional: Add rounded corners */
+}
+
 /* webkit solution */
 ::-webkit-input-placeholder {
   text-align: right;
@@ -91,7 +110,7 @@ tbody tr:nth-child(odd) {
 .nav {
   display: flex;
   padding: 1em 2em;
-  background-color: rgb(60, 60, 60);
+  /* background-color: rgb(60, 60, 60); */
 }
 
 .nav ul {
@@ -174,8 +193,9 @@ tbody tr:nth-child(odd) {
 
 .container {
   /* margin: auto; */
+  /* background-image: url("../../public/RecipeBox.jpg"); */
   width: 100%;
-  background-color: rgb(60, 60, 60);
+  /* background-color: rgb(60, 60, 60); */
   overflow: auto;
   /* height: 90%; */
 }
@@ -192,7 +212,7 @@ tbody tr:nth-child(odd) {
   resize: none;
   width: 100%;
   /* height: 30%; */
-  background-color: rgb(255, 216, 167);
+  /* background-color: rgb(56, 87, 4); */
   margin: auto;
   display: flex;
   flex-direction: column;

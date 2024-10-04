@@ -93,11 +93,11 @@ const SearchRecipes = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <form className="form pt-3 pb-3" onSubmit={handleSubmit}>
-        <div className="row mb-3 align-items-center">
+    <div className="container trasnparent-bg mt-5">
+      <form className="form pt-3 pb-3 text-center" onSubmit={handleSubmit}>
+        <div className="row mb-3 justify-content-center align-items-center">
           <div className="col-auto">
-            <label htmlFor="tTitle" className="form-label">
+            <label htmlFor="tTitle" className="form-label fw-bold text-success">
               Recipe Title
             </label>
           </div>
@@ -118,10 +118,10 @@ const SearchRecipes = () => {
           Search Recipes
         </button>
       </form>
-      <div className="search-results mt-5">
+      <div className="search-results mt-5 text-dark text-center">
         <h2>Search Results</h2>
         {searchResults.length > 0 ? (
-          <div className="row">
+          <div className="row d-flex justify-content-center">
             {searchResults.map((recipe, index) => (
               <RecipeCard
                 key={index}

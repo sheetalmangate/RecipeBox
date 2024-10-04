@@ -11,7 +11,7 @@ function App() {
   };
 
   return (
-    <div className="container">
+    <div className="container bg-image">
       <Navbar loggedIn={loggedIn} setLoggedIn={handleSetLoggedIn} />
       <main>
         <Outlet context={{ loggedIn, setLoggedIn: handleSetLoggedIn }} />
