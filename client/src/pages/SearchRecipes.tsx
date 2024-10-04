@@ -1,35 +1,30 @@
-import { useState, FormEvent, useEffect, ChangeEvent } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { searchRecipes } from "../api/recipeAPI";
+import { searchRecipes, saveRecipe } from "../api/recipeAPI";
+import { searchNutrition } from "../api/nutritionAPI";
 import { RecipeData } from "../interfaces/RecipeData";
 import auth from "../utils/auth";
 import LoginProps from "../interfaces/LoginProps";
 import "bootstrap/dist/css/bootstrap.min.css";
+import RecipeCard from "../components/RecipeShowData";
 
-const SearchRecipe = () => {
+const SearchRecipes = () => {
   const [recipeTitle, setRecipeTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [searchResults, setSearchResults] = useState<RecipeData[]>([]); // State to store search results
+  const [searchResults, setSearchResults] = useState<RecipeData[]>([]);
+  const [nutritionData, setNutritionData] = useState<{ [key: number]: any }>(
+    {},
+  );
   const navigate = useNavigate();
   const { setLoggedIn }: LoginProps = useOutletContext();
 
-  useEffect(() => {
-    // make sure user is still logged in (i.e. token is still valid)
-    if (!auth.loggedIn()) {
-      setLoggedIn(false);
-      navigate("/login");
-    }
-  }, []);
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // make sure user is still logged in (i.e. token is still valid)
     if (auth.loggedIn()) {
       if (recipeTitle) {
         try {
           const recipes = await searchRecipes(recipeTitle);
-          setSearchResults(recipes); // Store search results
-          console.log("recipes", recipes);
+          setSearchResults(recipes);
         } catch (err) {
           setErrorMessage("Recipe title is required.");
         }
@@ -45,16 +40,24 @@ const SearchRecipe = () => {
     setRecipeTitle(value);
   };
 
-  const handleSaveRecipe = async (recipe: RecipeData) => {
+  const handleSaveRecipe = async (recipe: RecipeData, index: number) => {
     // Implement save functionality here
     console.log("Saving recipe:", recipe);
     // make sure user is still logged in (i.e. token is still valid)
     if (auth.loggedIn()) {
       if (recipeTitle) {
         try {
-          // const recipes = await addRecipe(recipeTitle);
+          const data = await saveRecipe(recipe);
+          recipe.saved = true;
+
           // Store search results
-          console.log("recipe", recipe);
+          console.log("recipe saved", data);
+          // Update the recipe's saved state
+          setSearchResults((prevResults) =>
+            prevResults.map((r, i) =>
+              i === index ? { ...r, saved: true } : r,
+            ),
+          );
         } catch (err) {
           setErrorMessage("Recipe title is required.");
         }
@@ -65,69 +68,79 @@ const SearchRecipe = () => {
     }
   };
 
+  const handleShowNutrition = async (
+    ingredients: string,
+    servings: string,
+    index: number,
+  ) => {
+    if (nutritionData[index]) {
+      setNutritionData((prevData) => {
+        const newData = { ...prevData };
+        delete newData[index];
+        return newData;
+      });
+    } else {
+      try {
+        const nutrition = await searchNutrition(ingredients, servings);
+        setNutritionData((prevData) => ({
+          ...prevData,
+          [index]: nutrition,
+        }));
+      } catch (error) {
+        console.error("Failed to fetch nutrition data:", error);
+      }
+    }
+  };
+
   return (
-    <>
-      <div className="container mt-5">
-        <form className="form pt-3 pb-3" onSubmit={handleSubmit}>
-          {/* <h1>Search Recipes</h1> */}
-          <div className="row mb-3 align-items-center">
-            <div className="col-auto">
-              <label htmlFor="tTitle" className="form-label">
-                Recipe Title
-              </label>
-            </div>
-            <div className="col">
-              <textarea
-                id="tTitle"
-                name="title"
-                className="form-control"
-                value={recipeTitle || ""}
-                onChange={handleTitleChange}
-                rows={1} // Set rows to 1 to make it smaller
-                style={{ height: "38px" }}
-              />
-            </div>
+    <div className="container mt-5">
+      <form className="form pt-3 pb-3" onSubmit={handleSubmit}>
+        <div className="row mb-3 align-items-center">
+          <div className="col-auto">
+            <label htmlFor="tTitle" className="form-label">
+              Recipe Title
+            </label>
           </div>
-          <p className="text-danger">{errorMessage}</p>
-          <button type="submit" className="btn btn-primary">
-            Search Recipes
-          </button>
-        </form>
-        <div className="search-results mt-5">
-          <h2>Search Results</h2>
-          {searchResults.length > 0 ? (
-            <div className="row">
-              {searchResults.map((recipe, index) => (
-                <div className="col-md-4 mb-4" key={index}>
-                  <div className="card h-100 d-flex flex-column">
-                    <div className="card-body d-flex flex-column">
-                      <h3 className="card-title">{recipe.title}</h3>
-                      <p className="card-text">
-                        <strong>Ingredients:</strong> {recipe.ingredients}
-                      </p>
-                      <p className="card-text">
-                        <strong>Servings:</strong> {recipe.servings}
-                      </p>
-                      <div className="mt-auto">
-                        <button
-                          className="btn btn-success"
-                          onClick={() => handleSaveRecipe(recipe)}
-                        >
-                          Add to Recipe Box
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p>No recipes found.</p>
-          )}
+          <div className="col">
+            <textarea
+              id="tTitle"
+              name="title"
+              className="form-control"
+              value={recipeTitle || ""}
+              onChange={handleTitleChange}
+              rows={1}
+              style={{ height: "38px" }}
+            />
+          </div>
         </div>
+        <p className="text-danger">{errorMessage}</p>
+        <button type="submit" className="btn btn-primary">
+          Search Recipes
+        </button>
+      </form>
+      <div className="search-results mt-5">
+        <h2>Search Results</h2>
+        {searchResults.length > 0 ? (
+          <div className="row">
+            {searchResults.map((recipe, index) => (
+              <RecipeCard
+                key={index}
+                recipe={recipe}
+                index={index}
+                nutritionData={nutritionData}
+                handleShowNutrition={handleShowNutrition}
+                handleSaveRecipe={handleSaveRecipe}
+                showSaveButton={true} // Show the save button
+                setErrorMessage={setErrorMessage}
+              />
+            ))}
+          </div>
+        ) : (
+          <p>No recipes found {recipeTitle && ` for "${recipeTitle}"`}.</p>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
-export default SearchRecipe;
+export default SearchRecipes;
