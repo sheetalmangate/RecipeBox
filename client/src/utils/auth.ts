@@ -1,4 +1,11 @@
 import { JwtPayload, jwtDecode } from "jwt-decode";
+
+declare module "jwt-decode" {
+  export interface JwtPayload {
+    username: string;
+  }
+}
+
 class AuthService {
   getProfile() {
     const token = this.getToken();

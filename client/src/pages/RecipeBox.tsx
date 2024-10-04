@@ -3,6 +3,9 @@ import { retrieveRecipes } from "../api/recipeAPI"; // Import the retrieveRecipe
 import RecipeCard from "../components/RecipeShowData";
 import { searchNutrition } from "../api/nutritionAPI";
 // import { RecipeData } from "../interfaces/RecipeData";
+import LoginProps from "../interfaces/LoginProps";
+import auth from "../utils/auth";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 // Adjust the import based on your actual API file
 const useRecipes = () => {
@@ -26,10 +29,27 @@ const useRecipes = () => {
 };
 
 const RecipeBox = () => {
-  const { recipes, errorMessage } = useRecipes();
   const [nutritionData, setNutritionData] = useState<{ [key: number]: any }>(
     {},
   );
+  const { loggedIn, setLoggedIn }: LoginProps = useOutletContext();
+  const navigate = useNavigate();
+  let recipes: any[] = [];
+  let errorMessage: string | null = null;
+
+  useEffect(() => {
+    // make sure user is still logged in (i.e. token is still valid)
+    if (!auth.loggedIn()) {
+      setLoggedIn(false);
+      navigate("/login");
+    }
+  }, []);
+
+  if (loggedIn) {
+    const data = useRecipes();
+    recipes = data.recipes;
+    errorMessage = data.errorMessage;
+  }
 
   const handleShowNutrition = async (
     ingredients: string,
