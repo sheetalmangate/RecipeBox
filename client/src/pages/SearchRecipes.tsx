@@ -67,12 +67,24 @@ const SearchRecipe = () => {
     servings: string,
     index: number,
   ) => {
-    try {
-      const nutrition = await searchNutrition(ingredients, servings);
-      setNutritionData((prevData) => ({ ...prevData, [index]: nutrition }));
-    } catch (err) {
-      console.log("Failed to get nutrition data", err);
-      setErrorMessage("Failed to get nutrition data");
+    if (nutritionData[index]) {
+      // If nutrition data is already shown, hide it
+      setNutritionData((prevData) => {
+        const newData = { ...prevData };
+        delete newData[index];
+        return newData;
+      });
+    } else {
+      // If nutrition data is not shown, fetch and show it
+      try {
+        const nutrition = await searchNutrition(ingredients, servings);
+        setNutritionData((prevData) => ({
+          ...prevData,
+          [index]: nutrition,
+        }));
+      } catch (error) {
+        console.error("Failed to fetch nutrition data:", error);
+      }
     }
   };
 
