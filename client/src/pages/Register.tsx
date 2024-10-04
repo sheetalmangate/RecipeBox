@@ -27,7 +27,6 @@ const Register = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      console.log("Registering account with: ", loginData);
       await register(loginData);
       navigate("/login");
     } catch (err) {

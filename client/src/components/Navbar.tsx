@@ -44,13 +44,6 @@ const Navbar = (props: LoginProps) => {
                 </Link>
               </li>
             )}
-            {/* <li className="nav-item">
-              <Link to="/create">
-                <button type="button" id="create-ticket-link">
-                  New Recipe
-                </button>
-              </Link>
-            </li> */}
             <li className="nav-item">
               <button
                 type="button"
