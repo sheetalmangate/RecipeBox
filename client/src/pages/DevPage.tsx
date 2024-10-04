@@ -1,9 +1,9 @@
 import { useState, FormEvent, useEffect, ChangeEvent } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { saveRecipe, retrieveRecipes, searchRecipes } from "../api/recipeAPI";
-// import { searchNutrition } from "../api/nutritionAPI";
+import { searchNutrition } from "../api/nutritionAPI";
 import { RecipeData } from "../interfaces/RecipeData";
-// import { NutritionData } from "../interfaces/NutritionData";
+import { NutritionData } from "../interfaces/NutritionData";
 // import { UserData } from "../interfaces/UserData";
 // import { retrieveUsers } from "../api/userAPI";
 import auth from "../utils/auth";
@@ -42,13 +42,13 @@ const DevTest = () => {
               instructions: recipes[num].instructions,
             });
             console.log("myrecipe", myRecipe);
+            const nutrition: NutritionData = await searchNutrition(
+              recipes[num].ingredients || "",
+              recipes[num].servings || "",
+            );
+            console.log("nutrition", nutrition);
           }
-          // const nutrition: NutritionData = await searchNutrition(
-          //   ingredients,
-          //   recipes[0].servings || "",
-          // );
 
-          // console.log("nutrition", nutrition);
           const allrecipes = await retrieveRecipes();
           console.log("allrecipes", allrecipes);
           // navigate("/");
