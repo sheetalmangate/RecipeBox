@@ -11,6 +11,7 @@ const CreateRecipe = () => {
     ingredients: "",
     servings: "",
     instructions: "",
+    saved: false,
   });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();

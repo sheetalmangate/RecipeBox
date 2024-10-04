@@ -12,12 +12,10 @@ const Navbar = (props: LoginProps) => {
   useEffect(() => {
     // make sure user is still logged in (i.e. token is still valid)
     if (auth.loggedIn()) {
-      console.log("logged in");
       const { username } = auth.getProfile();
       setUsername(username);
     } else {
       setUsername("");
-      console.log("not logged in");
     }
   }, [props.loggedIn]);
 

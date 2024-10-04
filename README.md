@@ -8,7 +8,7 @@ Application that allows users to search for and save recipes in their own person
 
 Link to live site: https://recipe-box-kkqs.onrender.com/
 
-![Alt text](/client/src/assets/screenshot.png)
+![App Screenshot](/client/src/assets/screenshot.png)
 
 ## Table of Contents
 
