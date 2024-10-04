@@ -6,7 +6,6 @@ import App from "./App.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import Register from "./pages/Register.tsx";
 import Login from "./pages/Login.tsx";
-import CreateRecipe from "./pages/CreateRecipe.tsx";
 import SearchRecipe from "./pages/SearchRecipes.tsx";
 import DevTest from "./pages/DevPage.tsx";
 import RecipeBox from "./pages/RecipeBox.tsx";
@@ -26,10 +25,6 @@ const router = createBrowserRouter([
       {
         path: "/test",
         element: <DevTest />,
-      },
-      {
-        path: "/create",
-        element: <CreateRecipe />,
       },
       {
         path: "/register",
