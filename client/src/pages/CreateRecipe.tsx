@@ -2,15 +2,11 @@ import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { saveRecipe } from "../api/recipeAPI";
 import { RecipeData } from "../interfaces/RecipeData";
-// import { UserData } from "../interfaces/UserData";
-// import { retrieveUsers } from "../api/userAPI";
 import auth from "../utils/auth";
 import LoginProps from "../interfaces/LoginProps";
 
 const CreateRecipe = () => {
   const [newRecipe, setNewRecipe] = useState<RecipeData | undefined>({
-    // id: 0,
-    // unique_hash: "",
     title: "",
     ingredients: "",
     servings: "",
@@ -20,26 +16,13 @@ const CreateRecipe = () => {
   const navigate = useNavigate();
   const { setLoggedIn }: LoginProps = useOutletContext();
 
-  // const [users, setUsers] = useState<UserData[] | undefined>([]);
-
-  // const getAllUsers = async () => {
-  //   try {
-  //     const data = await retrieveUsers();
-  //     setUsers(data);
-  //   } catch (err) {
-  //     console.error("Failed to retrieve user info", err);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   // make sure user is still logged in (i.e. token is still valid)
-  //   if (auth.loggedIn()) {
-  //     getAllUsers();
-  //   } else {
-  //     setLoggedIn(false);
-  //     navigate("/login");
-  //   }
-  // }, []);
+  useEffect(() => {
+    // make sure user is still logged in (i.e. token is still valid)
+    if (!auth.loggedIn()) {
+      setLoggedIn(false);
+      navigate("/login");
+    }
+  }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

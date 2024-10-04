@@ -45,6 +45,12 @@ export function RecipeFactory(sequelize) {
       },
     },
     {
+      indexes: [
+        {
+          unique: true,
+          fields: ["unique_hash"],
+        },
+      ],
       tableName: "recipes",
       sequelize,
       hooks: {
