@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import LoginProps from "../interfaces/LoginProps";
+import ShareButton from "../components/ShareButton";
+import { RecipeData } from "../interfaces/RecipeData";
+
 
 import auth from "../utils/auth";
 
@@ -27,7 +30,12 @@ const Board = () => {
   if (error) {
     navigate("/login");
   }
-
+const data: RecipeData = {
+  title: "test title",
+  ingredients: "test ingredients",
+  servings: "test servings",
+  instructions: "test instructions",
+};
   return (
     <>
       {!loggedIn ? (
@@ -35,7 +43,12 @@ const Board = () => {
           <h1>Login to create, save, & view recipes</h1>
         </div>
       ) : (
-        <h1>Recipe Box</h1>
+        <>
+          <h1>Recipe Box</h1>
+          <ShareButton
+            data={data}
+          />
+        </>
       )}
     </>
   );
