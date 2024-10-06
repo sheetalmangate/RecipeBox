@@ -19,7 +19,6 @@ const SearchRecipes = () => {
   const { setLoggedIn }: LoginProps = useOutletContext();
 
   useEffect(() => {
-    // make sure user is still logged in (i.e. token is still valid)
     if (!auth.loggedIn()) {
       setLoggedIn(false);
       navigate("/login");
@@ -101,11 +100,11 @@ const SearchRecipes = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <form className="form pt-3 pb-3" onSubmit={handleSubmit}>
-        <div className="row mb-3 align-items-center">
+    <div className="container trasnparent-bg mt-5">
+      <form className="form pt-3 pb-3 text-center" onSubmit={handleSubmit}>
+        <div className="row mb-3 justify-content-center align-items-center">
           <div className="col-auto">
-            <label htmlFor="tTitle" className="form-label">
+            <label htmlFor="tTitle" className="form-label fw-bold text-light">
               Recipe Title
             </label>
           </div>
@@ -122,14 +121,18 @@ const SearchRecipes = () => {
           </div>
         </div>
         <p className="text-danger">{errorMessage}</p>
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="btn btn-primary text-light"
+          style={{ backgroundColor: "#4FABF2" }}
+        >
           Search Recipes
         </button>
       </form>
-      <div className="search-results mt-5">
+      <div className="search-results mt-5 text-light text-center">
         <h2>Search Results</h2>
         {searchResults.length > 0 ? (
-          <div className="row">
+          <div className="row d-flex justify-content-center">
             {searchResults.map((recipe, index) => (
               <RecipeCard
                 key={index}
@@ -138,7 +141,7 @@ const SearchRecipes = () => {
                 nutritionData={nutritionData}
                 handleShowNutrition={handleShowNutrition}
                 handleSaveRecipe={handleSaveRecipe}
-                showSaveButton={true} // Show the save button
+                showSaveButton={true}
                 setErrorMessage={setErrorMessage}
               />
             ))}

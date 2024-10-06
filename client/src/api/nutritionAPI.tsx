@@ -48,7 +48,6 @@ const searchNutrition = async (
 ): Promise<NutritionData> => {
   const ingredients = createIngredientList(ingredientsStr);
   try {
-    // const response = await fetch(`/api/nutrition/search/${ingredients}`, {
     const response = await fetch("/api/nutrition/search/", {
       method: "POST",
       headers: {
