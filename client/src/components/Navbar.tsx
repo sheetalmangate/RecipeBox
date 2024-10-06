@@ -50,13 +50,13 @@ const Navbar = (props: LoginProps) => {
                 </Link>
               </li>
             )}
-            {location.pathname !== "/test" && (
+            {/* {location.pathname !== "/test" && (
               <li className="nav-item ">
                 <Link className="btn-recipe " to="/test">
                   Dev
                 </Link>
               </li>
-            )}
+            )} */}
             <li className="nav-item">
               <button
                 type="button"

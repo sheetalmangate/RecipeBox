@@ -7,7 +7,8 @@ import ErrorPage from "./pages/ErrorPage.tsx";
 import Register from "./pages/Register.tsx";
 import Login from "./pages/Login.tsx";
 import SearchRecipe from "./pages/SearchRecipes.tsx";
-import DevTest from "./pages/DevPage.tsx";
+// import DevTest from "./pages/DevPage.tsx";
+import Logout from "./pages/Logout.tsx";
 import RecipeBox from "./pages/RecipeBox.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -23,8 +24,8 @@ const router = createBrowserRouter([
       },
       { path: "/search", element: <SearchRecipe /> },
       {
-        path: "/test",
-        element: <DevTest />,
+        path: "/logout",
+        element: <Logout />,
       },
       {
         path: "/register",
