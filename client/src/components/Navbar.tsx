@@ -24,7 +24,7 @@ const Navbar = (props: LoginProps) => {
       <div className="nav-title">
         {location.pathname !== "/" && (
           <Link to="/">
-            <h3 className="btn-recipe">
+            <h3 className="btn-recipe cursor-pointer">
               {username ? `${username}'s Recipe Box` : "Recipe Box"}
             </h3>
           </Link>
@@ -48,7 +48,7 @@ const Navbar = (props: LoginProps) => {
           <>
             {location.pathname !== "/search" && (
               <li className="nav-item ">
-                <Link className="btn-recipe " to="/search">
+                <Link className="btn-recipe cursor-pointer" to="/search">
                   Search Recipes
                 </Link>
               </li>
@@ -56,7 +56,7 @@ const Navbar = (props: LoginProps) => {
             <li className="nav-item">
               <button
                 type="button"
-                className="btn btn-secondary btn-block"
+                className="btn btn-secondary btn-block curson-pointer"
                 onClick={() => {
                   auth.logout();
                   props.setLoggedIn(false);

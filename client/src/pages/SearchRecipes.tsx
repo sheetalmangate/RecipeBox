@@ -19,7 +19,6 @@ const SearchRecipes = () => {
   const { setLoggedIn }: LoginProps = useOutletContext();
 
   useEffect(() => {
-    // make sure user is still logged in (i.e. token is still valid)
     if (!auth.loggedIn()) {
       setLoggedIn(false);
       navigate("/login");
@@ -124,7 +123,7 @@ const SearchRecipes = () => {
         <p className="text-danger">{errorMessage}</p>
         <button
           type="submit"
-          className="btn text-light"
+          className="btn btn-primary text-light"
           style={{ backgroundColor: "#4FABF2" }}
         >
           Search Recipes
@@ -142,7 +141,7 @@ const SearchRecipes = () => {
                 nutritionData={nutritionData}
                 handleShowNutrition={handleShowNutrition}
                 handleSaveRecipe={handleSaveRecipe}
-                showSaveButton={true} // Show the save button
+                showSaveButton={true}
                 setErrorMessage={setErrorMessage}
               />
             ))}
