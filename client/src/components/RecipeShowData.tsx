@@ -27,9 +27,12 @@ const RecipeCard = ({
 }: RecipeCard) => {
   return (
     <div className="col-12 mb-4">
-      <div className="card h-100 d-flex flex-column">
+      <div
+        className="card h-100 d-flex flex-column"
+        style={{ backgroundColor: "#FFFACD" }}
+      >
         <div className="card-body d-flex flex-column">
-          <h3 className="card-title text-center">{recipe.title}</h3>
+          <h3 className=" text-center text-info-emphasis">{recipe.title}</h3>
           <p className="card-text">
             <strong>Ingredients:</strong> {recipe.ingredients}
           </p>
@@ -41,7 +44,8 @@ const RecipeCard = ({
           </p>
           <div className="mt-auto d-flex justify-content-between">
             <button
-              className="btn btn-primary"
+              className="btn text-light"
+              style={{ backgroundColor: "#4FABF2" }}
               onClick={() => {
                 if (recipe.ingredients && recipe.servings) {
                   handleShowNutrition(
@@ -61,7 +65,8 @@ const RecipeCard = ({
             <ShareButton data={recipe} />
             {showSaveButton && handleSaveRecipe && (
               <button
-                className="btn btn-success"
+                className="btn text-light"
+                style={{ backgroundColor: "#4FABF2" }}
                 onClick={() => handleSaveRecipe(recipe, index)}
                 disabled={recipe.saved} // Disable button if recipe is already saved
               >

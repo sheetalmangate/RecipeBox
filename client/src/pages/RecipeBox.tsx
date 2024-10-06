@@ -77,7 +77,16 @@ const RecipeBox = () => {
 
   return (
     <div className="container mt-5">
-      <h2>My Recipe Box</h2>
+      <h2
+        style={{
+          color: "#FFD1DC",
+          fontStyle: "italic",
+          fontWeight: "bold",
+          textAlign: "center",
+        }}
+      >
+        Welcome back to your Recipe Box! Ready to cook up something delicious?
+      </h2>
       {errorMessage && <p className="text-danger">{errorMessage}</p>}
       {recipes.length > 0 ? (
         <div className="row">

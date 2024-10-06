@@ -19,11 +19,11 @@
   },
   "lint-staged": {
     "client/src/**/*.{ts,jsx}": [
-      "cd client && eslint --fix",
+      "npx eslint --fix",
       "prettier --write"
     ],
     "server/**/*.{js,jsx}": [
-      "cd server && eslint --fix",
+      "npx eslint --fix",
       "prettier --write"
     ],
     "**/*": "prettier --write --ignore-unknown"
