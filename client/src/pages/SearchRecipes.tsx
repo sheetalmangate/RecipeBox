@@ -49,16 +49,15 @@ const SearchRecipes = () => {
 
   const handleSaveRecipe = async (recipe: RecipeData, index: number) => {
     // Implement save functionality here
-    console.log("Saving recipe:", recipe);
     // make sure user is still logged in (i.e. token is still valid)
     if (auth.loggedIn()) {
       if (recipeTitle) {
         try {
-          const data = await saveRecipe(recipe);
+          await saveRecipe(recipe);
           recipe.saved = true;
 
           // Store search results
-          console.log("recipe saved", data);
+          // console.log("recipe saved", data);
           // Update the recipe's saved state
           setSearchResults((prevResults) =>
             prevResults.map((r, i) =>
