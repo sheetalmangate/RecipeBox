@@ -77,16 +77,6 @@ const RecipeBox = () => {
 
   return (
     <div className="container mt-5">
-      <h2
-        style={{
-          color: "#FFD1DC",
-          fontStyle: "italic",
-          fontWeight: "bold",
-          textAlign: "center",
-        }}
-      >
-        Welcome back to your Recipe Box! Ready to cook up something delicious?
-      </h2>
       {errorMessage && <p className="text-danger">{errorMessage}</p>}
       {recipes.length > 0 ? (
         <div className="row">
@@ -103,7 +93,7 @@ const RecipeBox = () => {
           ))}
         </div>
       ) : (
-        <p>No recipes found in your recipe box.</p>
+        <p class="fw-bold text-light">No recipes found in your recipe box.</p>
       )}
     </div>
   );

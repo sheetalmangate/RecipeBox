@@ -38,8 +38,8 @@ const Register = () => {
   return (
     <>
       <section id="section-register">
-        <form id="register-box" onSubmit={handleSubmit}>
-          <h1>Register Account</h1>
+        <form id="register-box" className="text-light" onSubmit={handleSubmit}>
+          <h2>Register Account</h2>
           <label>Username</label>
           <input
             type="text"
@@ -65,7 +65,9 @@ const Register = () => {
           />
           <br />
           <p className="error">{errorMessage}</p>
-          <button type="submit">Register</button>
+          <button type="submit" className="btn btn-secondary btn-block">
+            Register
+          </button>
         </form>
       </section>
     </>

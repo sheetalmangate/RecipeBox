@@ -121,11 +121,7 @@ const SearchRecipes = () => {
           </div>
         </div>
         <p className="text-danger">{errorMessage}</p>
-        <button
-          type="submit"
-          className="btn btn-primary text-light"
-          style={{ backgroundColor: "#4FABF2" }}
-        >
+        <button type="submit" className="btn-recipe w-auto ">
           Search Recipes
         </button>
       </form>

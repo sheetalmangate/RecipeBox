@@ -44,8 +44,7 @@ const RecipeCard = ({
           </p>
           <div className="mt-auto d-flex justify-content-between">
             <button
-              className="btn text-light"
-              style={{ backgroundColor: "#4FABF2" }}
+              className="btn-recipe w-auto"
               onClick={() => {
                 if (recipe.ingredients && recipe.servings) {
                   handleShowNutrition(
@@ -65,8 +64,7 @@ const RecipeCard = ({
             <ShareButton data={recipe} />
             {showSaveButton && handleSaveRecipe && (
               <button
-                className="btn text-light"
-                style={{ backgroundColor: "#4FABF2" }}
+                className="btn-recipe w-auto"
                 onClick={() => handleSaveRecipe(recipe, index)}
                 disabled={recipe.saved} // Disable button if recipe is already saved
               >

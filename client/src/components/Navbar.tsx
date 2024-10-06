@@ -20,56 +20,95 @@ const Navbar = (props: LoginProps) => {
   }, [props.loggedIn]);
 
   return (
-    <div className="nav">
-      <div className="nav-title">
-        {/* {location.pathname !== "/" && ( */}
-        <Link to="/">
-          <h3 className="btn-recipe cursor-pointer">
-            {username ? `${username}'s Recipe Box` : "Recipe Box"}
-          </h3>
-        </Link>
-        {/* )} */}
-      </div>
-      <ul>
-        {!props.loggedIn ? (
-          <>
-            <li className="nav-item">
-              <Link to="/register">
-                <button type="button">Register Account</button>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/login">
-                <button type="button">Login</button>
-              </Link>
-            </li>
-          </>
-        ) : (
-          <>
-            {location.pathname !== "/search" && (
-              <li className="nav-item ">
-                <Link className="btn-recipe cursor-pointer" to="/search">
+    <nav className="nav navbar-expand-lg">
+      <div className="container-fluid d-flex justify-content-between align-items-center">
+        <div className="d-flex align-items-center">
+          {props.loggedIn &&
+            (location.pathname === "/" ? (
+              <li className="navbar-brand">
+                <Link to="/search" className="btn-recipe text-decoration-none">
                   Search Recipes
                 </Link>
               </li>
-            )}
-            <li className="nav-item">
-              <button
-                type="button"
-                className="btn btn-secondary btn-block curson-pointer"
-                onClick={() => {
-                  auth.logout();
-                  props.setLoggedIn(false);
-                  navigate("/login");
+            ) : (
+              <li className="navbar-brand">
+                <Link to="/" className="btn-recipe text-decoration-none">
+                  Recipes Box
+                </Link>
+              </li>
+            ))}
+          <div className="d-flex justify-content-center align-items-center flex-grow-1">
+            {props.loggedIn ? (
+              <h2
+                style={{
+                  color: "#FFD1DC",
+                  fontStyle: "italic",
+                  fontWeight: "bold",
                 }}
               >
-                Logout
-              </button>
-            </li>
-          </>
-        )}
-      </ul>
-    </div>
+                Welcome back to your Recipe Box,{" "}
+                <span style={{ color: "#4FABF2" }}>{username}!</span> Ready to
+                cook up something delicious?
+              </h2>
+            ) : (
+              <h2
+                style={{
+                  color: "#FFD1DC",
+                  fontStyle: "italic",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Welcome back to Recipe Box
+              </h2>
+            )}
+          </div>
+        </div>
+        <div className="d-flex flex-column align-items-end ms-auto">
+          <ul className="navbar-nav mb-2 mb-lg-0 d-flex align-items-end">
+            {!props.loggedIn ? (
+              location.pathname === "/register" ? (
+                <li className="nav-item">
+                  <Link to="/login">
+                    <button
+                      type="button"
+                      className="btn btn-secondary btn-block"
+                    >
+                      Login
+                    </button>
+                  </Link>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <Link to="/register">
+                    <button
+                      type="button"
+                      className="btn btn-secondary btn-block"
+                    >
+                      Register Account
+                    </button>
+                  </Link>
+                </li>
+              )
+            ) : (
+              <li className="nav-item">
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-block"
+                  onClick={() => {
+                    auth.logout();
+                    props.setLoggedIn(false);
+                    navigate("/login");
+                  }}
+                >
+                  Logout
+                </button>
+              </li>
+            )}
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 };
 

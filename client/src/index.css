@@ -18,7 +18,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -281,8 +281,14 @@ tbody tr:nth-child(odd) {
 }
 
 .btn-recipe:hover {
-  background-color: #4fabf2; /* Darker shade for hover effect */
+  background-color: #03406e; /* Darker shade for hover effect */
   color: white;
+}
+
+.btn-disabled {
+  background-color: #d3d3d3; /* Light gray background */
+  color: #6c757d; /* Gray text color */
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
 }
 
 .card-custom {
