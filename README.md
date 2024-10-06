@@ -12,12 +12,15 @@ Link to live site: https://recipe-box-kkqs.onrender.com/
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [Tests](#tests)
-- [License](#license)
-- [Questions](#questions)
+- [Recipe Box](#recipe-box)
+  - [Description](#description)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Contributing](#contributing)
+  - [Tests](#tests)
+  - [License](#license)
+  - [Questions](#questions)
 
 ## Installation
 

@@ -1,5 +1,6 @@
 import { RecipeData } from "../interfaces/RecipeData";
 import NutritionShowData from "./NutritionShowData";
+import ShareButton from "./ShareButton";
 
 interface RecipeCard {
   recipe: RecipeData;
@@ -57,6 +58,7 @@ const RecipeCard = ({
             >
               {nutritionData[index] ? "Hide Nutrition" : "Show Nutrition"}
             </button>
+            <ShareButton data={recipe} />
             {showSaveButton && handleSaveRecipe && (
               <button
                 className="btn btn-success"
