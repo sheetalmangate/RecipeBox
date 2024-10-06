@@ -3,6 +3,7 @@ import {
   searchRecipes,
   retrieveRecipes,
   saveRecipe,
+  shareRecipe,
 } from "../../controllers/recipeController.js";
 
 const router = Router();
@@ -13,5 +14,7 @@ router.get("/search/:title", searchRecipes);
 router.get("/", retrieveRecipes);
 // POST /recipes - Save a new recipe
 router.post("/", saveRecipe);
+// POST /recipes/share - Share a recipe
+router.post("/share", shareRecipe);
 
 export { router as recipeRouter };
