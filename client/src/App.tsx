@@ -2,6 +2,8 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { useState } from "react";
 import auth from "./utils/auth";
+import "./main.css";
+import Header from "./components/Header/Header.tsx";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(auth.loggedIn());
@@ -11,12 +13,13 @@ function App() {
   };
 
   return (
-    <div className="container">
+    <>
+      <Header loggedIn={loggedIn} setLoggedIn={handleSetLoggedIn} />
       <Navbar loggedIn={loggedIn} setLoggedIn={handleSetLoggedIn} />
       <main>
         <Outlet context={{ loggedIn, setLoggedIn: handleSetLoggedIn }} />
       </main>
-    </div>
+    </>
   );
 }
 
