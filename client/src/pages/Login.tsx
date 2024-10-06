@@ -40,7 +40,7 @@ const Login = () => {
   return (
     <>
       <section id="section-login">
-        <form id="login-box" onSubmit={handleSubmit}>
+        <form id="login-box" className="text-light" onSubmit={handleSubmit}>
           <h2>Login</h2>
           <label>Username</label>
           <input
@@ -59,7 +59,9 @@ const Login = () => {
           />
           <br />
           <p className="error">{errorMessage}</p>
-          <button type="submit">Login</button>
+          <button className="btn btn-secondary btn-block" type="submit">
+            Login
+          </button>
         </form>
       </section>
     </>

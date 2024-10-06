@@ -5,7 +5,6 @@ import auth from "./utils/auth";
 
 import "./index.css";
 import "./main.css";
-import Header from "./components/Header/Header.tsx";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(auth.loggedIn());
@@ -16,7 +15,6 @@ function App() {
 
   return (
     <div className="bg-image">
-      <Header loggedIn={loggedIn} setLoggedIn={handleSetLoggedIn} />
       <Navbar loggedIn={loggedIn} setLoggedIn={handleSetLoggedIn} />
       <main>
         <Outlet context={{ loggedIn, setLoggedIn: handleSetLoggedIn }} />

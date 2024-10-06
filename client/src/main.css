@@ -19,7 +19,7 @@ body {
   line-height: 1.5;
   color: #000000;
   /*background-image: linear-gradient(to right bottom, #697785, #82989f, #a3bab7, #cbdad1, #f7fbee);*/
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to right bottom,
     #e792b4,
     #f7fbee,
@@ -30,8 +30,7 @@ body {
   /*background-image: linear-gradient(to right bottom, #f4eaee, #faedec, #fdf1ea, #fcf6ea, #f7fbee);*/
   /*background-image: linear-gradient(to right bottom, #b797c7, #bc9ec9, #c1a6cc, #c5adce, #cab5d1);*/
 }
-
-main {
+*/ main {
   width: 90%;
   max-width: 50rem;
   margin: auto;
@@ -77,7 +76,7 @@ header a:hover {
 }
 
 section {
-  background-color: #f3eef6;
+  /* background-color: #f3eef6; */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   width: 80%;
 }
@@ -109,13 +108,13 @@ section {
   background-color: #f7fbee;
   height: 3rem;
   margin: 5px 0px;
-  color: #000000;
+  /* color: #000000; */
 }
 
 #login-box label,
 #register-box label {
   font-size: 17px;
-  color: gray;
+  /* color: black; */
   font-weight: bold;
 }
 
@@ -129,8 +128,8 @@ section {
 #register-box button {
   font-size: 17px;
   font-weight: bold;
-  background-color: #000000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  /* background-color: #000000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); */
   color: #ffffff;
   cursor: pointer;
   margin: 20px auto;
