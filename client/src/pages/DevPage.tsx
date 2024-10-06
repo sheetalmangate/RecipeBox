@@ -40,6 +40,7 @@ const DevTest = () => {
               ingredients: recipes[num].ingredients,
               servings: recipes[num].servings,
               instructions: recipes[num].instructions,
+              saved: recipes[num].saved,
             });
             console.log("myrecipe", myRecipe);
             const nutrition: NutritionData = await searchNutrition(

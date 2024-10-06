@@ -1,4 +1,4 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { searchRecipes, saveRecipe } from "../api/recipeAPI";
 import { searchNutrition } from "../api/nutritionAPI";
@@ -17,6 +17,14 @@ const SearchRecipes = () => {
   );
   const navigate = useNavigate();
   const { setLoggedIn }: LoginProps = useOutletContext();
+
+  useEffect(() => {
+    // make sure user is still logged in (i.e. token is still valid)
+    if (!auth.loggedIn()) {
+      setLoggedIn(false);
+      navigate("/login");
+    }
+  }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
