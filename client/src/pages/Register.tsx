@@ -36,34 +36,39 @@ const Register = () => {
   };
 
   return (
-    <div className="container">
-      <form className="form" onSubmit={handleSubmit}>
-        <h1>Register Account</h1>
-        <label>Username</label>
-        <input
-          type="text"
-          name="username"
-          value={loginData.username || ""}
-          onChange={handleChange}
-        />
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          value={loginData.email || ""}
-          onChange={handleChange}
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={loginData.password || ""}
-          onChange={handleChange}
-        />
-        <p className="error">{errorMessage}</p>
-        <button type="submit">Submit Form</button>
-      </form>
-    </div>
+    <>
+      <section id="section-register">
+        <form id="register-box" onSubmit={handleSubmit}>
+          <h1>Register Account</h1>
+          <label>Username</label>
+          <input
+            type="text"
+            name="username"
+            value={loginData.username || ""}
+            onChange={handleChange}
+          />
+          <br />
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            value={loginData.email || ""}
+            onChange={handleChange}
+          />
+          <br />
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            value={loginData.password || ""}
+            onChange={handleChange}
+          />
+          <br />
+          <p className="error">{errorMessage}</p>
+          <button type="submit">Register</button>
+        </form>
+      </section>
+    </>
   );
 };
 
