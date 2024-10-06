@@ -22,13 +22,13 @@ const Navbar = (props: LoginProps) => {
   return (
     <div className="nav">
       <div className="nav-title">
-        {location.pathname !== "/" && (
-          <Link to="/">
-            <h3 className="btn-recipe cursor-pointer">
-              {username ? `${username}'s Recipe Box` : "Recipe Box"}
-            </h3>
-          </Link>
-        )}
+        {/* {location.pathname !== "/" && ( */}
+        <Link to="/">
+          <h3 className="btn-recipe cursor-pointer">
+            {username ? `${username}'s Recipe Box` : "Recipe Box"}
+          </h3>
+        </Link>
+        {/* )} */}
       </div>
       <ul>
         {!props.loggedIn ? (

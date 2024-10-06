@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import auth from "../../utils/auth";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import LoginProps from "../../interfaces/LoginProps";
 import { useState, useEffect } from "react";
 
 function Header(props: LoginProps) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [username, setUsername] = useState("");
 
   useEffect(() => {
@@ -26,15 +26,29 @@ function Header(props: LoginProps) {
       {!props.loggedIn ? (
         <nav>
           <ul>
-            <Link to="/login">
-              <li>Sign In</li>
-            </Link>
             <Link to="/register">
               <li>Register Account</li>
             </Link>
+            <Link to="/login">
+              <li>Sign In</li>
+            </Link>
           </ul>
         </nav>
-      ) : undefined}
+      ) : (
+        <nav>
+          <h3>{username}</h3>
+          <ul>
+            {location.pathname !== "/search" && (
+              <Link to="/search">
+                <li>Search Recipes</li>
+              </Link>
+            )}
+            <Link to="/logout">
+              <li>Logout</li>
+            </Link>
+          </ul>
+        </nav>
+      )}
     </header>
   );
 }
