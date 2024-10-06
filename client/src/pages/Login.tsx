@@ -38,27 +38,31 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <form className="form" onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        <label>Username</label>
-        <input
-          type="text"
-          name="username"
-          value={loginData.username || ""}
-          onChange={handleChange}
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={loginData.password || ""}
-          onChange={handleChange}
-        />
-        <p className="error">{errorMessage}</p>
-        <button type="submit">Submit Form</button>
-      </form>
-    </div>
+    <>
+      <section id="section-login">
+        <form id="login-box" onSubmit={handleSubmit}>
+          <h2>Login</h2>
+          <label>Username</label>
+          <input
+            type="text"
+            name="username"
+            value={loginData.username || ""}
+            onChange={handleChange}
+          />
+          <br />
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            value={loginData.password || ""}
+            onChange={handleChange}
+          />
+          <br />
+          <p className="error">{errorMessage}</p>
+          <button type="submit">Login</button>
+        </form>
+      </section>
+    </>
   );
 };
 
