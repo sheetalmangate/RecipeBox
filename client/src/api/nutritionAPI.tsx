@@ -8,7 +8,7 @@ const formatNutritionData = (data: any, servings: number): NutritionData => {
       servings: servings,
       dietlabels: data.dietLabels,
       cautions: data.cautions,
-      calories: data.calories,
+      calories: data.totalNutrients.ENERC_KCAL.quantity,
       fat: data.totalNutrients.FAT.quantity,
       carbohydrates: data.totalNutrients.CHOCDF.quantity,
       fiber: data.totalNutrients.FIBTG.quantity,
