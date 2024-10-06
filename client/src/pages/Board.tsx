@@ -1,41 +1,25 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 import LoginProps from "../interfaces/LoginProps";
-import ShareButton from "../components/ShareButton";
-import { RecipeData } from "../interfaces/RecipeData";
 
 
 import auth from "../utils/auth";
 
 const Board = () => {
-  const [error, setError] = useState(false);
-  const navigate = useNavigate();
   const { loggedIn, setLoggedIn }: LoginProps = useOutletContext();
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
-    const checkLoggedIn = async () => {
-      try {
-        const token = auth.getToken();
-        if (token) {
-          setLoggedIn(true);
-        }
-      } catch (err) {
-        setError(true);
-        console.error("Failed to check if logged in", err);
-      }
-    };
-    checkLoggedIn();
-  });
+    // make sure user is still logged in (i.e. token is still valid)
+    if (!auth.loggedIn()) {
+      setLoggedIn(false);
+    } else {
+      setLoggedIn(true);
+      const { username } = auth.getProfile();
+      setUsername(username);
+    }
+  }, []);
 
-  if (error) {
-    navigate("/login");
-  }
-const data: RecipeData = {
-  title: "test title",
-  ingredients: "test ingredients",
-  servings: "test servings",
-  instructions: "test instructions",
-};
   return (
     <>
       {!loggedIn ? (
@@ -44,10 +28,7 @@ const data: RecipeData = {
         </div>
       ) : (
         <>
-          <h1>Recipe Box</h1>
-          <ShareButton
-            data={data}
-          />
+          <h1>{username}'s Recipe Box</h1>
         </>
       )}
     </>

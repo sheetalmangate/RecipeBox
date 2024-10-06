@@ -1,6 +1,6 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, useEffect, ChangeEvent } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { saveRecipe, searchRecipes } from "../api/recipeAPI";
+import { saveRecipe, retrieveRecipes, searchRecipes } from "../api/recipeAPI";
 import { searchNutrition } from "../api/nutritionAPI";
 import { RecipeData } from "../interfaces/RecipeData";
 import { NutritionData } from "../interfaces/NutritionData";
@@ -15,6 +15,14 @@ const DevTest = () => {
   const navigate = useNavigate();
   const { setLoggedIn }: LoginProps = useOutletContext();
 
+  useEffect(() => {
+    // make sure user is still logged in (i.e. token is still valid)
+    if (!auth.loggedIn()) {
+      setLoggedIn(false);
+      navigate("/login");
+    }
+  }, []);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     // make sure user is still logged in (i.e. token is still valid)
@@ -22,20 +30,28 @@ const DevTest = () => {
       if (recipeTitle) {
         try {
           const recipes: RecipeData[] = await searchRecipes(recipeTitle);
-          const ingredients = recipes[0].ingredients || "";
-          const myRecipe = await saveRecipe({
-            title: recipes[0].title,
-            ingredients: recipes[0].ingredients,
-            servings: recipes[0].servings,
-            instructions: recipes[0].instructions,
-          });
-          console.log("myrecipe", myRecipe);
-          const nutrition: NutritionData = await searchNutrition(
-            ingredients,
-            recipes[0].servings || "",
-          );
+          console.log("recipes", recipes);
+          // const ingredients = recipes[0].ingredients || "";
+          const num = 1;
+          // the API can return 0 - 10 recipes, so we need to check if the recipe exists
+          if (recipes.length >= num) {
+            const myRecipe = await saveRecipe({
+              title: recipes[num].title,
+              ingredients: recipes[num].ingredients,
+              servings: recipes[num].servings,
+              instructions: recipes[num].instructions,
+              saved: recipes[num].saved,
+            });
+            console.log("myrecipe", myRecipe);
+            const nutrition: NutritionData = await searchNutrition(
+              recipes[num].ingredients || "",
+              recipes[num].servings || "",
+            );
+            console.log("nutrition", nutrition);
+          }
 
-          console.log("nutrition", nutrition);
+          const allrecipes = await retrieveRecipes();
+          console.log("allrecipes", allrecipes);
           // navigate("/");
         } catch (err) {
           setErrorMessage("Recipe title is required.");

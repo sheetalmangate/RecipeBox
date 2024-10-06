@@ -61,8 +61,10 @@ const searchNutrition = async (
     if (!response.ok) {
       throw new Error("invalid API response, check network tab!");
     }
+    // convert servings to number
     const servingsArr = servingsStr.match(/\d+/);
     const servings = servingsArr ? parseInt(servingsArr[0], 10) : 1;
+
     return formatNutritionData(data, servings);
   } catch (err) {
     console.log("Error from data retrieval: ", err);

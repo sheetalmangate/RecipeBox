@@ -3,13 +3,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
 import App from "./App.tsx";
-import Board from "./pages/Board.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import Register from "./pages/Register.tsx";
 import Login from "./pages/Login.tsx";
-import CreateRecipe from "./pages/CreateRecipe.tsx";
 import SearchRecipe from "./pages/SearchRecipes.tsx";
 import DevTest from "./pages/DevPage.tsx";
+import RecipeBox from "./pages/RecipeBox.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const router = createBrowserRouter([
@@ -20,16 +19,12 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Board />,
+        element: <RecipeBox />,
       },
       { path: "/search", element: <SearchRecipe /> },
       {
         path: "/test",
         element: <DevTest />,
-      },
-      {
-        path: "/create",
-        element: <CreateRecipe />,
       },
       {
         path: "/register",

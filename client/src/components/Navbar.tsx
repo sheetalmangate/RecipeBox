@@ -3,9 +3,21 @@ import { Link } from "react-router-dom";
 import auth from "../utils/auth";
 import { useNavigate } from "react-router-dom";
 import LoginProps from "../interfaces/LoginProps";
+import { useState, useEffect } from "react";
 
 const Navbar = (props: LoginProps) => {
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    // make sure user is still logged in (i.e. token is still valid)
+    if (auth.loggedIn()) {
+      const { username } = auth.getProfile();
+      setUsername(username);
+    } else {
+      setUsername("");
+    }
+  }, [props.loggedIn]);
 
   return (
     <div className="nav">
@@ -30,6 +42,7 @@ const Navbar = (props: LoginProps) => {
           </>
         ) : (
           <>
+            <h3>{username}</h3>
             {location.pathname !== "/search" && (
               <li className="nav-item ">
                 <Link className="btn-recipe " to="/search">
@@ -44,13 +57,6 @@ const Navbar = (props: LoginProps) => {
                 </Link>
               </li>
             )}
-            {/* <li className="nav-item">
-              <Link to="/create">
-                <button type="button" id="create-ticket-link">
-                  New Recipe
-                </button>
-              </Link>
-            </li> */}
             <li className="nav-item">
               <button
                 type="button"

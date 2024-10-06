@@ -18,9 +18,9 @@ export const login = async (req, res) => {
   if (!passwordIsValid) {
     return res.status(401).json({ message: "Authentication failed" });
   }
+  const id = user.dataValues.id;
   const secretKey = process.env.JWT_SECRET_KEY || "";
-  const token = jwt.sign({ id, username, email }, secretKey, { expiresIn: "1h" });
-  console.log("token", token);
+  const token = jwt.sign({ id, username }, secretKey, { expiresIn: "1h" }); //////// 1h
   return res.json({ token });
 };
 
