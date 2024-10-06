@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { useState } from "react";
 import auth from "./utils/auth";
+import "./index.css";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(auth.loggedIn());
@@ -11,7 +12,7 @@ function App() {
   };
 
   return (
-    <div className="container bg-image">
+    <div className="bg-image">
       <Navbar loggedIn={loggedIn} setLoggedIn={handleSetLoggedIn} />
       <main>
         <Outlet context={{ loggedIn, setLoggedIn: handleSetLoggedIn }} />

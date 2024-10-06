@@ -13,11 +13,22 @@
 }
 
 .bg-image {
-  background-image: url("../../public/RecipeBox.jpg"); /* Update with the correct path to your image */
+  background-image: url("./assets/RecipeBox.jpg"); /* Update with the correct path to your image */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh; /* Ensure the container takes up the full height of the viewport */
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: -1;
+}
+
+.search-results .row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .transparent-bg {
@@ -151,49 +162,9 @@ tbody tr:nth-child(odd) {
   table-layout: fixed;
 }
 
-.board {
-  width: 100%;
-}
-
-.board-display {
-  display: flex;
-}
-
-.swim-lane {
-  text-align: center;
-  font-weight: 500;
-  width: 33%;
-  height: 90vh;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  margin: 5px;
-  padding: 5px;
-}
-
-.todo {
-  background-color: rgb(255, 216, 167);
-}
-
-.inprogress {
-  background-color: darkgray;
-}
-
-.done {
-  background-color: rgb(108, 87, 87);
-}
-
-.ticket-card {
-  text-align: left;
-  background-color: #fff;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border: 0.1em solid black;
-}
-
 .container {
   /* margin: auto; */
-  /* background-image: url("../../public/RecipeBox.jpg"); */
+  /* background-image: url("../public/RecipeBox.jpg"); */
   width: 100%;
   /* background-color: rgb(60, 60, 60); */
   overflow: auto;
@@ -312,4 +283,11 @@ tbody tr:nth-child(odd) {
 .btn-recipe:hover {
   background-color: #4fabf2; /* Darker shade for hover effect */
   color: white;
+}
+
+.card-custom {
+  background-color: #f8f9fa; /* Light grey background color */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
 }

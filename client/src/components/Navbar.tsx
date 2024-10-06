@@ -22,9 +22,13 @@ const Navbar = (props: LoginProps) => {
   return (
     <div className="nav">
       <div className="nav-title">
-        <Link to="/">
-          <h3>Recipe Box</h3>
-        </Link>
+        {location.pathname !== "/" && (
+          <Link to="/">
+            <h3 className="btn-recipe">
+              {username ? `${username}'s Recipe Box` : "Recipe Box"}
+            </h3>
+          </Link>
+        )}
       </div>
       <ul>
         {!props.loggedIn ? (
@@ -42,18 +46,10 @@ const Navbar = (props: LoginProps) => {
           </>
         ) : (
           <>
-            <h3>{username}</h3>
             {location.pathname !== "/search" && (
               <li className="nav-item ">
                 <Link className="btn-recipe " to="/search">
                   Search Recipes
-                </Link>
-              </li>
-            )}
-            {location.pathname !== "/test" && (
-              <li className="nav-item ">
-                <Link className="btn-recipe " to="/test">
-                  Dev
                 </Link>
               </li>
             )}
