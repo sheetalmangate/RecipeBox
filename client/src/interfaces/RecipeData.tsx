@@ -3,5 +3,5 @@ export interface RecipeData {
   ingredients: string | null;
   servings: string | null;
   instructions: string | null;
-  saved: boolean;
+  saved: boolean ;
 }

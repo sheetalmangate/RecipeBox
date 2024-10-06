@@ -31,7 +31,7 @@ const ShareButton = ({data}:ShareButtonProps) => {
   };
   const handleShare = () => {
     if (handleValidation()) {
-      shareRecipe({ title, ingredients, servings, instructions });
+      shareRecipe({ title, ingredients, servings, instructions, saved:true});
       console.log(`Sharing with ${email}. Message sent!`);
       handleClose();
     }
