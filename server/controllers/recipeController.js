@@ -98,20 +98,20 @@ export const saveRecipe = async (req, res) => {
 };
 export const shareRecipe = async (req, res) => {
     try {
-    const {recipe} = req.body;
+    const { title, servings, ingredients, instructions } = req.body;
     const {user} = req;
     // const recipe = {title: "test", servings: 4, ingredients: "test", instructions: "test"};
     // const user = {email: "test@test.com", username: "test"};
-    if (recipe && user) {
+    if (user) {
         const info = await transporter.sendMail({
           from: `${user.email}`, // sender address
           to: "bar@example.com, baz@example.com", // list of receivers
           subject: "Check out this recipe ------", // Subject line
           text: "Hello world?", // plain text body
-          html: `<h1>${recipe.title}</h1>
-          <p>Serves: ${recipe.servings}</p>
-          <p>Ingredients: ${recipe.ingredients}</p>
-          <p>Instructions: ${recipe.instructions}</p>
+          html: `<h1>${title}</h1>
+          <p>Serves: ${servings}</p>
+          <p>Ingredients: ${ingredients}</p>
+          <p>Instructions: ${instructions}</p>
           <p>From: ${user.username}</p>
           `
           , // html body
