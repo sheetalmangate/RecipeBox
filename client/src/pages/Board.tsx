@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import LoginProps from "../interfaces/LoginProps";
 
+
 import auth from "../utils/auth";
 
 const Board = () => {

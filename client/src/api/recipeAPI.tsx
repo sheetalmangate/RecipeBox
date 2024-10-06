@@ -65,5 +65,28 @@ const retrieveRecipes = async () => {
     return [];
   }
 };
+const shareRecipe = async (body: RecipeData) => {
+  try {
+    const response = await fetch("/api/recipes/share", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Auth.getToken()}`,
+      },
+      body: JSON.stringify(body),
+    });
+    const data = await response.json();
 
-export { searchRecipes, saveRecipe, retrieveRecipes };
+    if (!response.ok) {
+      throw new Error("invalid API response, check network tab!");
+    }
+
+    return data;
+  } catch (err) {
+    console.log("Error from Recipe Creation: ", err);
+    return Promise.reject("Could not create recipe");
+  }
+};
+
+export { searchRecipes, saveRecipe, retrieveRecipes, shareRecipe };
+
