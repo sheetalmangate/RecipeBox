@@ -46,6 +46,7 @@ const Register = () => {
         <h2 className="mb-4">Register Account</h2>
         <label className="fs-4 mb-4">Username</label>
         <input
+          className="text-light"
           type="text"
           name="username"
           value={loginData.username || ""}
@@ -54,6 +55,7 @@ const Register = () => {
         <br />
         <label className="fs-4 mb-4">Email</label>
         <input
+          className="text-light"
           type="email"
           name="email"
           value={loginData.email || ""}
@@ -62,6 +64,7 @@ const Register = () => {
         <br />
         <label className="fs-4 mb-4">Password</label>
         <input
+          className="text-light"
           type="password"
           name="password"
           value={loginData.password || ""}
