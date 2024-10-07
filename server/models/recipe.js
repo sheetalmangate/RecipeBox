@@ -22,7 +22,7 @@ export function RecipeFactory(sequelize) {
         primaryKey: true,
       },
       unique_hash: {
-        // bcrypt hash of the title, ingredients, servings, and instructions to prevent duplicate recipes
+        // hash of the title, ingredients, servings, and instructions to prevent duplicate recipes
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
