@@ -4,7 +4,6 @@ import { useState } from "react";
 import auth from "./utils/auth";
 
 import "./index.css";
-import "./main.css";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(auth.loggedIn());

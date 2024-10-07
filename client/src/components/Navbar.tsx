@@ -22,7 +22,7 @@ const Navbar = (props: LoginProps) => {
   return (
     <nav className="nav navbar-expand-lg">
       <div className="container-fluid d-flex justify-content-between align-items-center">
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center ">
           {props.loggedIn &&
             (location.pathname === "/" ? (
               <li className="navbar-brand">
@@ -37,18 +37,22 @@ const Navbar = (props: LoginProps) => {
                 </Link>
               </li>
             ))}
-          <div className="d-flex justify-content-center align-items-center flex-grow-1">
+          <div className="d-flex flex-grow-1 justify-content-center ">
             {props.loggedIn ? (
               <h2
                 style={{
                   color: "#FFD1DC",
                   fontStyle: "italic",
                   fontWeight: "bold",
+                  textAlign: "center",
+                  // display:"flex",
+                  // alignContent:"center",
                 }}
               >
                 Welcome back to your Recipe Box,{" "}
-                <span style={{ color: "#4FABF2" }}>{username}!</span> Ready to
-                cook up something delicious?
+                <span style={{ color: "#4FABF2" }}>{username}!</span>
+                <br />
+                Ready to cook up something delicious?
               </h2>
             ) : (
               <h2
@@ -58,8 +62,9 @@ const Navbar = (props: LoginProps) => {
                   fontWeight: "bold",
                   textAlign: "center",
                 }}
+                className="text-center "
               >
-                Welcome back to Recipe Box
+                Welcome to Recipe Box
               </h2>
             )}
           </div>
