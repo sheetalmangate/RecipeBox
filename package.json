@@ -43,6 +43,7 @@
     "wait-on": "^8.0.1"
   },
   "dependencies": {
+    "eslint-plugin-prettier": "^5.2.1",
     "nodemailer": "^6.9.15"
   }
 }
