@@ -22,7 +22,7 @@ const Navbar = (props: LoginProps) => {
   return (
     <nav className="nav navbar-expand-lg">
       <div className="container-fluid d-flex justify-content-between align-items-center">
-        <div className="d-flex align-items-center ">
+        <div className="d-flex align-items-center flex-grow-1">
           {props.loggedIn &&
             (location.pathname === "/" ? (
               <li className="navbar-brand">

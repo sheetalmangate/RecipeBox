@@ -48,6 +48,7 @@ const Login = () => {
         <h1 className="mb-4">Login</h1>
         <label className="fs-4 mb-4">Username</label>
         <input
+          className="text-light"
           type="text"
           name="username"
           id="username"
@@ -56,6 +57,7 @@ const Login = () => {
         />
         <label className="fs-4 mb-4">Password</label>
         <input
+          className="text-light"
           type="password"
           name="password"
           id="password"
