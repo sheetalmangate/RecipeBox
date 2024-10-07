@@ -37,7 +37,7 @@ const Navbar = (props: LoginProps) => {
                 </Link>
               </li>
             ))}
-          <div className="d-flex justify-content-center align-items-center flex-grow-1">
+          <div className="d-flex justify-content-center align-items-center flex-grow-1 text-center">
             {props.loggedIn ? (
               <h2
                 style={{
@@ -47,8 +47,9 @@ const Navbar = (props: LoginProps) => {
                 }}
               >
                 Welcome back to your Recipe Box,{" "}
-                <span style={{ color: "#4FABF2" }}>{username}!</span> Ready to
-                cook up something delicious?
+                <span style={{ color: "#4FABF2" }}>{username}!</span>
+                <br />
+                Ready to cook up something delicious?
               </h2>
             ) : (
               <h2

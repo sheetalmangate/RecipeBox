@@ -191,14 +191,13 @@ tbody tr:nth-child(odd) {
   align-items: center;
 }
 
-.form > h1,
-.form > label {
+.form {
   color: black;
 }
 
 .form > input {
   width: 200px;
-  background-color: white;
+  /* background-color: white; */
   color: black;
 }
 

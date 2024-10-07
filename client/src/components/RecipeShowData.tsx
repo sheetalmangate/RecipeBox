@@ -64,9 +64,9 @@ const RecipeCard = ({
             <ShareButton data={recipe} />
             {showSaveButton && handleSaveRecipe && (
               <button
-                className="btn-recipe w-auto"
+                className={`btn-recipe w-auto ${recipe.saved ? "btn-disabled" : ""}`}
                 onClick={() => handleSaveRecipe(recipe, index)}
-                disabled={recipe.saved} // Disable button if recipe is already saved
+                disabled={recipe.saved}
               >
                 {recipe.saved ? "Saved to Recipe Box" : "Add to My Recipe Box"}
               </button>

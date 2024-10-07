@@ -93,7 +93,9 @@ const RecipeBox = () => {
           ))}
         </div>
       ) : (
-        <p class="fw-bold text-light">No recipes found in your recipe box.</p>
+        <p className="fw-bold text-light">
+          No recipes found in your recipe box.
+        </p>
       )}
     </div>
   );
