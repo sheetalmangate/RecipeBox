@@ -106,13 +106,17 @@ export const shareRecipe = async (req, res) => {
       const info = await transporter.sendMail({
         from: `${user.email}`, // sender address
         to: "bar@example.com, baz@example.com", // list of receivers
-        subject: "Check out this recipe ------", // Subject line
+        subject: "Check out this recipe from The Recipe Box!", // Subject line
         text: "Hello world?", // plain text body
-        html: `<h1>${title}</h1>
+        html: `
+        <h1>${user.username} has shared a Recipe Box recipe with you!</h1>
+        <h2>${title}</h2>
           <p>Serves: ${servings}</p>
           <p>Ingredients: ${ingredients}</p>
           <p>Instructions: ${instructions}</p>
           <p>From: ${user.username}</p>
+          <br/>
+          <a href="http://localhost:3000">Check out all our great recipes!</a>
           `, // html body
       });
 
