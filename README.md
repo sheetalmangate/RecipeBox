@@ -4,44 +4,62 @@
 
 ## Description
 
-Application that allows users to search for and save recipes in their own personal recipe box.
-
-Link to live site: https://recipe-box-kkqs.onrender.com/
+Your go-to platform for nutritious and tasty recipes! Our website offers a seamless way to search for recipes by nutritional content, save your favorite dishes, and effortlessly share them via email. Perfect for health-conscious individuals and food lovers alike, we make it easy to plan meals and stay on track with your dietary goals.
 
 ![App Screenshot](/client/src/assets/screenshot.png)
 
-## Table of Contents
+## Concept
 
-- [Recipe Box](#recipe-box)
-  - [Description](#description)
-  - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Contributing](#contributing)
-  - [Tests](#tests)
-  - [License](#license)
-  - [Questions](#questions)
+- Find recipes with ease: Search for dishes based on specific nutritional values to fit your dietary needs.
 
-## Installation
+- Save your favorites: Easily store recipes for future use and quick access.
 
-Clone the repository from github. Install the dependent packages using: npm install
+- Share with a click: Share your top recipes via email with friends and family.
 
-## Usage
+- Perfect for health-conscious individuals: Tailored for those looking to maintain healthy eating habits while enjoying delicious meals.
 
-Run the application using: npm run start<br>
+- Meal planning made simple: Quickly compile recipes to build weekly meal plans with balanced nutrition.
 
-## Contributing
+## App Design/Build
 
-Fork the project. Create a feature branch. Commit your changes. Push the branch. Open a pull request.
+Recipe Box provides a pleasant user experience with a responsive web design using the following technologies.
 
-## Tests
+Backend
 
-Run the application testing the various options. Add a truck, add a car, and add a motorbike. Test that a truck can tow and a motorbike can wheelie. Print details for the various vehicle types.
+- Node.js
+- Express.js
+
+Database
+
+- PostgreSQL
+- Sequelize ORM
+
+Frontend
+
+- React
+- JavaScript
+- CSS
+- Typescript
+- Bootstrap
+
+## Credits and Links
+
+Development Team:
+
+- Stephen Sneed: https://github.com/sfsneed70
+
+- Bhanu Sree: https://github.com/bhanusreek85
+
+- Sheetal Mangate: https://github.com/sheetalmangate
+
+- Joel De Luna: https://github.com/jdeluna06
+
+Application:
+
+- Live site: https://recipe-box-kkqs.onrender.com/
+
+- Github Repo: https://github.com/sheetalmangate/RecipeBox
 
 ## License
 
     This project is licensed under the MIT license.
-
-## Questions
-
-If you have any questions, feel free to reach out to me at [sfsneed@gmail.com](mailto:sfsneed@gmail.com) or on [GitHub](https://github.com/sfsneed70).
